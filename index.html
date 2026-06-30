@@ -208,7 +208,8 @@
                                 <option value="'Courier New', monospace">Courier New</option>
                             </select>
                         </div>
-                        <div class="param-row"><span>Размер текста</span><input type="range" id="r_font_size" min="12" max="48" value="24" style="width:60%"></div>
+                        <div class="param-row"><span>Размер вопроса</span><input type="range" id="r_q_font_size" min="12" max="64" value="24" style="width:60%"></div>
+                        <div class="param-row"><span>Размер ответа</span><input type="range" id="r_a_font_size" min="10" max="48" value="18" style="width:60%"></div>
                     </div>
 
                     <div class="control-group"><span class="control-label">Язык Игры</span><div class="sub-tabs" style="padding:0 0 10px 0;"><button class="sub-tab-link active" onclick="app.setGameLang('ru')">RU</button><button class="sub-tab-link" onclick="app.setGameLang('en')">EN</button></div><div id="lang_ru_fields"><label style="font-size:9px;color:#888;">Заголовок ( | = перенос):</label><input type="text" class="fx-input" id="i_title_ru" value="БИТВА|С БОССОМ"><label style="font-size:9px;color:#888;">Победа:</label><input type="text" class="fx-input" id="i_win_msg_ru" value="ТЫ ПОБЕДИЛ!"><label style="font-size:9px;color:#888;">Поражение:</label><input type="text" class="fx-input" id="i_lose_msg_ru" value="ТЫ ПРОИГРАЛ!"><label style="font-size:9px;color:#888;">Кнопка старт:</label><input type="text" class="fx-input" id="i_play_btn_ru" value="ИГРАТЬ"></div><div id="lang_en_fields" style="display:none;"><label style="font-size:9px;color:#888;">Title ( | = new line):</label><input type="text" class="fx-input" id="i_title_en" value="BOSS|BATTLE"><label style="font-size:9px;color:#888;">Win:</label><input type="text" class="fx-input" id="i_win_msg_en" value="YOU WIN!"><label style="font-size:9px;color:#888;">Lose:</label><input type="text" class="fx-input" id="i_lose_msg_en" value="YOU LOSE!"><label style="font-size:9px;color:#888;">Start Button:</label><input type="text" class="fx-input" id="i_play_btn_en" value="PLAY"></div></div>
@@ -248,7 +249,7 @@
             timer:5,
             timerOn:true,
             titleScreenOn:true,
-            design: { bgCol: '#12101e', bgOp: 0, sepLine: '#00d2ff', timerBg: '#231f34', timerTxt: '#ffd700', plateBg: '#231f34', plateOp: 80, btnCol: '#333333', btnGlow: 0, btnGlowCol: '#00e5ff', panelCol: '#12101e', panelOp: 95, hpHero: '#00ff88', hpBoss: '#ff3b30', hpBorder: '#111111', hpGlow: 0, hpGlowCol: '#8a2be2', fontFam: "'Montserrat', sans-serif", fontSize: 24 }
+            design: { bgCol: '#12101e', bgOp: 0, sepLine: '#00d2ff', timerBg: '#231f34', timerTxt: '#ffd700', plateBg: '#231f34', plateOp: 80, btnCol: '#333333', btnGlow: 0, btnGlowCol: '#00e5ff', panelCol: '#12101e', panelOp: 95, hpHero: '#00ff88', hpBoss: '#ff3b30', hpBorder: '#111111', hpGlow: 0, hpGlowCol: '#8a2be2', fontFam: "'Montserrat', sans-serif", qFontSize: 24, aFontSize: 18 }
         },
         anims:[{id:'idle',name:'Покой'},{id:'float',name:'Парение'},{id:'pulse',name:'Пульс'},{id:'shake',name:'Тряска'},{id:'glitch',name:'Глюк'},{id:'spin',name:'Вращение'},{id:'neon',name:'Неон'},{id:'wobble',name:'Шатание'},{id:'swing',name:'Качание'},{id:'bounce',name:'Прыжок'},{id:'flip',name:'Переворот'},{id:'ghost',name:'Призрак'}],
         
@@ -265,7 +266,7 @@
         setGameLang(l){this.gameLang=l;const btnContainer=document.querySelector('#sec_quests .sub-tabs');btnContainer.children[0].classList.toggle('active',l==='ru');btnContainer.children[1].classList.toggle('active',l==='en');document.getElementById('lang_ru_fields').style.display=l==='ru'?'block':'none';document.getElementById('lang_en_fields').style.display=l==='en'?'block':'none';},
         renderAnims(target){const grid=document.getElementById('ag_'+target);grid.innerHTML='';this.anims.forEach(a=>{const b=document.createElement('div');b.className='fx-btn'+(this.data[target].anim===a.id?' active':'');b.innerText=a.name;b.onclick=()=>{this.data[target].anim=a.id;this.renderAnims(target);this.updatePreview();};grid.appendChild(b);});},
 
-        async loadImageAndCompress(source, quality = 0.7, maxWidth = 1024, maxHeight = 1024) {
+        async loadImageAndCompress(source, quality = 0.6, maxWidth = 1024, maxHeight = 1024) {
             return new Promise(async (resolve) => {
                 const img = new Image();
                 let detectedMimeType = 'image/jpeg';
@@ -289,7 +290,8 @@
                     
                     let compressedDataUrl;
                     if (detectedMimeType === 'image/png' || detectedMimeType === 'image/webp') {
-                        compressedDataUrl = canvas.toDataURL('image/png');
+                        // Использование image/webp позволяет сохранить прозрачность и радикально ужать вес (в отличие от PNG)
+                        compressedDataUrl = canvas.toDataURL('image/webp', quality);
                     } else {
                         compressedDataUrl = canvas.toDataURL('image/jpeg', quality);
                     }
@@ -343,28 +345,28 @@
 
         async handleImage(file,target){
             if(file){
-                const compressedData = await this.loadImageAndCompress(file, 0.7, 512, 512);
+                const compressedData = await this.loadImageAndCompress(file, 0.6, 600, 600);
                 this.data[target].src=compressedData;
                 this.updatePreview();
             }
         },
         async handleImageURL(url, target){
             if(url){
-                const compressedData = await this.loadImageAndCompress(url, 0.7, 512, 512);
+                const compressedData = await this.loadImageAndCompress(url, 0.6, 600, 600);
                 this.data[target].src = compressedData;
                 this.updatePreview();
             }
         },
         async handleLocations(files){
             for(let file of files){
-                const compressedData = await this.loadImageAndCompress(file, 0.75, 1280, 1280);
+                const compressedData = await this.loadImageAndCompress(file, 0.6, 1280, 1280);
                 this.locations.push({name:file.name,data:compressedData});
             }
             this.renderLocationList();
         },
         async addLocationURL(url){
             if(url){
-                const compressedData = await this.loadImageAndCompress(url, 0.75, 1280, 1280);
+                const compressedData = await this.loadImageAndCompress(url, 0.6, 1280, 1280);
                 const name = url.substring(url.lastIndexOf('/') + 1) || 'URL Image';
                 this.locations.push({name: name, data: compressedData});
                 this.renderLocationList();
@@ -436,7 +438,8 @@
             bindD('r_hp_glow', 'hpGlow', true);
             bindD('c_hp_glow', 'hpGlowCol', false);
             bindD('s_font', 'fontFam', false);
-            bindD('r_font_size', 'fontSize', true);
+            bindD('r_q_font_size', 'qFontSize', true);
+            bindD('r_a_font_size', 'aFontSize', true);
         },
         renderQuestList(){
             const list=document.getElementById('quest-list');
@@ -507,14 +510,14 @@
             }
             styleTag.innerHTML = `
                 .quest-dock { background: rgba(${panelRgb}, ${dsg.panelOp / 100}) !important; font-family: ${dsg.fontFam} !important; border-top-color: ${dsg.sepLine} !important; }
-                .q-preview-text { font-size: ${dsg.fontSize}px !important; }
-                .q-dummy-btn { background: ${dsg.btnCol} !important; font-family: ${dsg.fontFam} !important; box-shadow: ${dsg.btnGlow > 0 ? `0 0 ${dsg.btnGlow}px ${dsg.btnGlowCol}` : 'none'} !important; border-color: ${dsg.btnCol} !important; }
+                .q-preview-text { font-size: ${dsg.qFontSize}px !important; }
+                .q-dummy-btn { background: ${dsg.btnCol} !important; font-family: ${dsg.fontFam} !important; font-size: ${dsg.aFontSize}px !important; box-shadow: ${dsg.btnGlow > 0 ? `0 0 ${dsg.btnGlow}px ${dsg.btnGlowCol}` : 'none'} !important; border-color: ${dsg.btnCol} !important; }
                 .q-dummy-btn.correct { background: var(--green) !important; box-shadow: 0 0 10px var(--green) !important; border-color: var(--green) !important; color: #000 !important; }
                 .q-dummy-btn.wrong { background: var(--red) !important; box-shadow: 0 0 10px var(--red) !important; border-color: var(--red) !important; }
                 #hp_h_preview { background: ${dsg.hpHero} !important; }
                 #hp_b_preview { background: ${dsg.hpBoss} !important; }
                 .hp-bar-preview { border-color: ${dsg.hpBorder} !important; box-shadow: ${dsg.hpGlow > 0 ? `0 0 ${dsg.hpGlow}px ${dsg.hpGlowCol}` : 'none'} !important; }
-                #preview_input_ans { font-family: ${dsg.fontFam} !important; }
+                #preview_input_ans { font-family: ${dsg.fontFam} !important; font-size: ${dsg.aFontSize}px !important; }
                 .hud-player { background: rgba(${plateRgb}, ${dsg.plateOp/100}) !important; border-radius: 20px !important; padding: 8px 15px !important; box-shadow: 0 0 10px ${dsg.plateBg}, inset 0 0 8px rgba(0,0,0,0.5) !important; }
                 .timer-preview { background: rgba(${timerBgRgb}, 0.8) !important; color: ${dsg.timerTxt} !important; border-color: ${dsg.timerBg} !important; box-shadow: 0 0 10px ${dsg.timerBg} !important; }
             `;
@@ -675,15 +678,15 @@ body{margin:0;overflow:hidden;font-family:'Rajdhani',sans-serif;user-select:none
 .score-popup{position:fixed;z-index:101;opacity:0;font-family:'Press Start 2P',cursive;font-size:20px;transform:translateX(-50%);pointer-events:none;}
 .score-popup.show{animation:float-up-fade 1s ease-out forwards;}
 .ui-panel{position:absolute; bottom:0; left:0; right:0; background:rgba(${panelRgb},${d.design.panelOp/100});padding:20px;border-top:4px solid ${d.design.sepLine};display:flex;flex-direction:column;align-items:center;gap:15px;min-height:20%;box-shadow:0 -10px 50px rgba(0,0,0,0.5);z-index:20;}
-.q-text{color:#fff;font-size:${d.design.fontSize}px;font-weight:700;text-align:center;font-family:${d.design.fontFam};}
+.q-text{color:#fff;font-size:${d.design.qFontSize}px;font-weight:700;text-align:center;font-family:${d.design.fontFam};}
 .btns{display:flex;gap:15px;flex-wrap:wrap;justify-content:center;width:100%;}
-.game-btn{background:${d.design.btnCol};border:2px solid ${d.design.btnCol};box-shadow:${d.design.btnGlow > 0 ? `0 0 ${d.design.btnGlow}px ${d.design.btnGlowCol}` : 'none'};color:#fff;padding:15px 30px;font-family:${d.design.fontFam};font-weight:700;font-size:18px;cursor:pointer;text-transform:uppercase;border-radius:8px;transition:0.1s;min-width:150px;}
+.game-btn{background:${d.design.btnCol};border:2px solid ${d.design.btnCol};box-shadow:${d.design.btnGlow > 0 ? `0 0 ${d.design.btnGlow}px ${d.design.btnGlowCol}` : 'none'};color:#fff;padding:15px 30px;font-family:${d.design.fontFam};font-weight:700;font-size:${d.design.aFontSize}px;cursor:pointer;text-transform:uppercase;border-radius:8px;transition:0.1s;min-width:150px;}
 .game-btn:hover{background:#555;border-color:#fff;transform:translateY(-2px);}
 .game-btn:disabled { opacity: 0.7; cursor: not-allowed; }
 .inp-area{display:flex;flex-direction:column;align-items:center;gap:10px;position:relative;}
 .inp-row{display:flex;gap:10px;}
-input[type=text]{padding:15px;border-radius:6px;border:2px solid #fff;font-family:${d.design.fontFam};font-weight:700;background:#000;color:#fff;font-size:18px;outline:none; transition: 0.3s;}
-.correct-answer-hint { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); color: var(--green); margin-top: 10px; font-size: 16px; font-weight: 700; white-space: nowrap;}
+input[type=text]{padding:15px;border-radius:6px;border:2px solid #fff;font-family:${d.design.fontFam};font-weight:700;background:#000;color:#fff;font-size:${d.design.aFontSize}px;outline:none; transition: 0.3s;}
+.correct-answer-hint { position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); color: var(--green); margin-bottom: 10px; font-size: 16px; font-weight: 700; white-space: nowrap; text-shadow: 0 0 5px #000;}
 </style></head><body>
 ${this.musicFile?`<audio id="bg-music" src="${this.musicFile.data}" loop></audio>`:''}
 <div id="projectile"></div>
