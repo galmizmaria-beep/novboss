@@ -177,6 +177,12 @@
                         <div class="param-row"><span>Цвет фона</span><input type="color" id="c_bg_col" value="#12101e" style="border:none;width:20px;height:20px;background:none;padding:0;"></div>
                         <div class="param-row"><span>Прозрачность фона (%)</span><input type="range" id="r_bg_op" min="0" max="100" value="0" style="width:60%"></div>
                         
+                        <div class="param-row"><span>Фон титульного экрана</span><input type="color" id="c_title_bg" value="#12101e" style="border:none;width:20px;height:20px;background:none;padding:0;"></div>
+                        <div class="param-row"><span>Прозрачность титульного (%)</span><input type="range" id="r_title_op" min="0" max="100" value="95" style="width:50%"></div>
+                        <div class="param-row"><span>Цвет кнопки "Играть"</span><input type="color" id="c_play_btn" value="#00d2ff" style="border:none;width:20px;height:20px;background:none;padding:0;"></div>
+                        <div class="param-row"><span>Прозрачность кн. "Играть"</span><input type="range" id="r_play_op" min="0" max="100" value="20" style="width:50%"></div>
+                        <div class="param-row"><span>Свечение кн. "Играть"</span><input type="range" id="r_play_glow" min="0" max="50" value="10" style="width:40%"><input type="color" id="c_play_glow" value="#00e5ff" style="border:none;width:20px;height:20px;background:none;padding:0;"></div>
+
                         <div class="param-row"><span>Разделительная линия</span><input type="color" id="c_sep_line" value="#00d2ff" style="border:none;width:20px;height:20px;background:none;padding:0;"></div>
                         <div class="param-row"><span>Фон таймера</span><input type="color" id="c_timer_bg" value="#231f34" style="border:none;width:20px;height:20px;background:none;padding:0;"></div>
                         <div class="param-row"><span>Текст таймера</span><input type="color" id="c_timer_txt" value="#ffd700" style="border:none;width:20px;height:20px;background:none;padding:0;"></div>
@@ -184,8 +190,8 @@
                         <div class="param-row"><span>Цвет плашек имен</span><input type="color" id="c_plate_bg" value="#231f34" style="border:none;width:20px;height:20px;background:none;padding:0;"></div>
                         <div class="param-row"><span>Прозрачность плашек</span><input type="range" id="r_plate_op" min="0" max="100" value="80" style="width:50%"></div>
 
-                        <div class="param-row"><span>Цвет кнопок</span><input type="color" id="c_btn_col" value="#333333" style="border:none;width:20px;height:20px;background:none;padding:0;"></div>
-                        <div class="param-row"><span>Свечение кнопок</span><input type="range" id="r_btn_glow" min="0" max="50" value="0" style="width:40%"><input type="color" id="c_btn_glow" value="#00e5ff" style="border:none;width:20px;height:20px;background:none;padding:0;"></div>
+                        <div class="param-row"><span>Цвет кнопок квестов</span><input type="color" id="c_btn_col" value="#333333" style="border:none;width:20px;height:20px;background:none;padding:0;"></div>
+                        <div class="param-row"><span>Свечение кнопок квестов</span><input type="range" id="r_btn_glow" min="0" max="50" value="0" style="width:40%"><input type="color" id="c_btn_glow" value="#00e5ff" style="border:none;width:20px;height:20px;background:none;padding:0;"></div>
 
                         <div class="param-row"><span>Нижняя панель</span><input type="color" id="c_panel_col" value="#12101e" style="border:none;width:20px;height:20px;background:none;padding:0;"></div>
                         <div class="param-row"><span>Прозрачность панели</span><input type="range" id="r_panel_op" min="0" max="100" value="95" style="width:60%"></div>
@@ -220,6 +226,11 @@
             <div class="gen-panel"><button class="btn-generate" onclick="app.generate()" id="b_gen">СКОПИРОВАТЬ КОД</button></div>
         </div>
         <div class="stage" id="stage_bg">
+            <div id="preview_title_overlay" style="position:absolute;inset:0;z-index:90;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:0.3s;pointer-events:none;">
+                <div id="prev_title_text" style="font-size:36px;color:#00e5ff;text-align:center;margin-bottom:30px;text-shadow:4px 4px 0 var(--primary);line-height:1.5;"></div>
+                <button id="prev_play_btn" style="padding:15px 40px;border:2px solid;border-radius:50px;font-size:20px;font-weight:900;color:#fff;">ИГРАТЬ</button>
+            </div>
+            
             <div class="preview-hud" id="preview-hud">
                 <div class="hud-player"><span class="hud-char-name" id="p_h_name"></span><div class="hp-bar-preview"><div id="hp_h_preview" class="hp-fill-preview" style="background:var(--green); width:50%;"></div></div></div>
                 <div class="timer-preview" id="p_timer">05:00</div>
@@ -249,7 +260,7 @@
             timer:5,
             timerOn:true,
             titleScreenOn:true,
-            design: { bgCol: '#12101e', bgOp: 0, sepLine: '#00d2ff', timerBg: '#231f34', timerTxt: '#ffd700', plateBg: '#231f34', plateOp: 80, btnCol: '#333333', btnGlow: 0, btnGlowCol: '#00e5ff', panelCol: '#12101e', panelOp: 95, hpHero: '#00ff88', hpBoss: '#ff3b30', hpBorder: '#111111', hpGlow: 0, hpGlowCol: '#8a2be2', fontFam: "'Montserrat', sans-serif", qFontSize: 24, aFontSize: 18 }
+            design: { bgCol: '#12101e', bgOp: 0, sepLine: '#00d2ff', timerBg: '#231f34', timerTxt: '#ffd700', plateBg: '#231f34', plateOp: 80, btnCol: '#333333', btnGlow: 0, btnGlowCol: '#00e5ff', panelCol: '#12101e', panelOp: 95, hpHero: '#00ff88', hpBoss: '#ff3b30', hpBorder: '#111111', hpGlow: 0, hpGlowCol: '#8a2be2', fontFam: "'Montserrat', sans-serif", qFontSize: 24, aFontSize: 18, titleBgCol: '#12101e', titleBgOp: 95, playBtnCol: '#00d2ff', playBtnOp: 20, playBtnGlow: 10, playBtnGlowCol: '#00e5ff' }
         },
         anims:[{id:'idle',name:'Покой'},{id:'float',name:'Парение'},{id:'pulse',name:'Пульс'},{id:'shake',name:'Тряска'},{id:'glitch',name:'Глюк'},{id:'spin',name:'Вращение'},{id:'neon',name:'Неон'},{id:'wobble',name:'Шатание'},{id:'swing',name:'Качание'},{id:'bounce',name:'Прыжок'},{id:'flip',name:'Переворот'},{id:'ghost',name:'Призрак'}],
         
@@ -263,7 +274,7 @@
         setMainTab(t){document.querySelectorAll('.main-tab-link').forEach(e=>e.classList.remove('active'));document.querySelector(`[onclick="app.setMainTab('${t}')"]`).classList.add('active');document.getElementById('sec_chars').classList.toggle('show',t==='chars');document.getElementById('sec_quests').classList.toggle('show',t==='quests');},
         setCharTab(t){document.querySelector('#sec_chars .sub-tab-link.active').classList.remove('active');document.querySelector(`[onclick="app.setCharTab('${t}')"]`).classList.add('active');document.getElementById('cfg_hero').style.display=t==='hero'?'block':'none';document.getElementById('cfg_boss').style.display=t==='boss'?'block':'none';},
         setQType(t){document.querySelector('#quest-editor-panel #b_choice').className=t==='choice'?'sub-tab-link active':'sub-tab-link';document.querySelector('#quest-editor-panel #b_input').className=t==='input'?'sub-tab-link active':'sub-tab-link';document.querySelector('#quest-editor-panel #area_choice').style.display=t==='choice'?'block':'none';document.querySelector('#quest-editor-panel #area_input').style.display=t==='input'?'block':'none';},
-        setGameLang(l){this.gameLang=l;const btnContainer=document.querySelector('#sec_quests .sub-tabs');btnContainer.children[0].classList.toggle('active',l==='ru');btnContainer.children[1].classList.toggle('active',l==='en');document.getElementById('lang_ru_fields').style.display=l==='ru'?'block':'none';document.getElementById('lang_en_fields').style.display=l==='en'?'block':'none';},
+        setGameLang(l){this.gameLang=l;const btnContainer=document.querySelector('#sec_quests .sub-tabs');btnContainer.children[0].classList.toggle('active',l==='ru');btnContainer.children[1].classList.toggle('active',l==='en');document.getElementById('lang_ru_fields').style.display=l==='ru'?'block':'none';document.getElementById('lang_en_fields').style.display=l==='en'?'block':'none'; this.updatePreview(); },
         renderAnims(target){const grid=document.getElementById('ag_'+target);grid.innerHTML='';this.anims.forEach(a=>{const b=document.createElement('div');b.className='fx-btn'+(this.data[target].anim===a.id?' active':'');b.innerText=a.name;b.onclick=()=>{this.data[target].anim=a.id;this.renderAnims(target);this.updatePreview();};grid.appendChild(b);});},
 
         async loadImageAndCompress(source, quality = 0.6, maxWidth = 1024, maxHeight = 1024) {
@@ -290,7 +301,6 @@
                     
                     let compressedDataUrl;
                     if (detectedMimeType === 'image/png' || detectedMimeType === 'image/webp') {
-                        // Использование image/webp позволяет сохранить прозрачность и радикально ужать вес (в отличие от PNG)
                         compressedDataUrl = canvas.toDataURL('image/webp', quality);
                     } else {
                         compressedDataUrl = canvas.toDataURL('image/jpeg', quality);
@@ -440,6 +450,18 @@
             bindD('s_font', 'fontFam', false);
             bindD('r_q_font_size', 'qFontSize', true);
             bindD('r_a_font_size', 'aFontSize', true);
+            
+            bindD('c_title_bg', 'titleBgCol', false);
+            bindD('r_title_op', 'titleBgOp', true);
+            bindD('c_play_btn', 'playBtnCol', false);
+            bindD('r_play_op', 'playBtnOp', true);
+            bindD('r_play_glow', 'playBtnGlow', true);
+            bindD('c_play_glow', 'playBtnGlowCol', false);
+
+            ['i_title_ru', 'i_title_en', 'i_play_btn_ru', 'i_play_btn_en'].forEach(id => {
+                const el = document.getElementById(id);
+                if(el) el.addEventListener('input', () => this.updatePreview());
+            });
         },
         renderQuestList(){
             const list=document.getElementById('quest-list');
@@ -498,6 +520,8 @@
             const panelRgb = hex2rgb(dsg.panelCol);
             const plateRgb = hex2rgb(dsg.plateBg);
             const timerBgRgb = hex2rgb(dsg.timerBg);
+            const titleBgRgb = hex2rgb(dsg.titleBgCol);
+            const playBtnRgb = hex2rgb(dsg.playBtnCol);
 
             document.getElementById('stage_bg').style.backgroundColor = dsg.bgCol;
             document.getElementById('stage_bg').style.backgroundImage = this.locations.length > 0 ? `linear-gradient(rgba(${bgRgb}, ${dsg.bgOp / 100}), rgba(${bgRgb}, ${dsg.bgOp / 100})), url(${this.locations[0].data})` : `none`;
@@ -509,8 +533,9 @@
                 document.head.appendChild(styleTag);
             }
             styleTag.innerHTML = `
+                .hud-char-name { font-family: ${dsg.fontFam} !important; }
                 .quest-dock { background: rgba(${panelRgb}, ${dsg.panelOp / 100}) !important; font-family: ${dsg.fontFam} !important; border-top-color: ${dsg.sepLine} !important; }
-                .q-preview-text { font-size: ${dsg.qFontSize}px !important; }
+                .q-preview-text { font-size: ${dsg.qFontSize}px !important; font-family: ${dsg.fontFam} !important; }
                 .q-dummy-btn { background: ${dsg.btnCol} !important; font-family: ${dsg.fontFam} !important; font-size: ${dsg.aFontSize}px !important; box-shadow: ${dsg.btnGlow > 0 ? `0 0 ${dsg.btnGlow}px ${dsg.btnGlowCol}` : 'none'} !important; border-color: ${dsg.btnCol} !important; }
                 .q-dummy-btn.correct { background: var(--green) !important; box-shadow: 0 0 10px var(--green) !important; border-color: var(--green) !important; color: #000 !important; }
                 .q-dummy-btn.wrong { background: var(--red) !important; box-shadow: 0 0 10px var(--red) !important; border-color: var(--red) !important; }
@@ -519,8 +544,31 @@
                 .hp-bar-preview { border-color: ${dsg.hpBorder} !important; box-shadow: ${dsg.hpGlow > 0 ? `0 0 ${dsg.hpGlow}px ${dsg.hpGlowCol}` : 'none'} !important; }
                 #preview_input_ans { font-family: ${dsg.fontFam} !important; font-size: ${dsg.aFontSize}px !important; }
                 .hud-player { background: rgba(${plateRgb}, ${dsg.plateOp/100}) !important; border-radius: 20px !important; padding: 8px 15px !important; box-shadow: 0 0 10px ${dsg.plateBg}, inset 0 0 8px rgba(0,0,0,0.5) !important; }
-                .timer-preview { background: rgba(${timerBgRgb}, 0.8) !important; color: ${dsg.timerTxt} !important; border-color: ${dsg.timerBg} !important; box-shadow: 0 0 10px ${dsg.timerBg} !important; }
+                .timer-preview { font-family: ${dsg.fontFam} !important; background: rgba(${timerBgRgb}, 0.8) !important; color: ${dsg.timerTxt} !important; border-color: ${dsg.timerBg} !important; box-shadow: 0 0 10px ${dsg.timerBg} !important; }
             `;
+
+            // Обновление предпросмотра титульного экрана
+            const titleOverlay = document.getElementById('preview_title_overlay');
+            if (this.data.titleScreenOn) {
+                titleOverlay.style.display = 'flex';
+                titleOverlay.style.background = `rgba(${titleBgRgb}, ${dsg.titleBgOp / 100})`;
+                
+                const langTitle = this.gameLang === 'ru' ? document.getElementById('i_title_ru').value : document.getElementById('i_title_en').value;
+                const langPlay = this.gameLang === 'ru' ? document.getElementById('i_play_btn_ru').value : document.getElementById('i_play_btn_en').value;
+                
+                const pTitle = document.getElementById('prev_title_text');
+                pTitle.innerHTML = langTitle.replace(/\|/g, '<br>');
+                pTitle.style.fontFamily = dsg.fontFam;
+
+                const pPlay = document.getElementById('prev_play_btn');
+                pPlay.innerText = langPlay;
+                pPlay.style.fontFamily = dsg.fontFam;
+                pPlay.style.background = `rgba(${playBtnRgb}, ${dsg.playBtnOp / 100})`;
+                pPlay.style.borderColor = dsg.playBtnCol;
+                pPlay.style.boxShadow = dsg.playBtnGlow > 0 ? `0 0 ${dsg.playBtnGlow}px ${dsg.playBtnGlowCol}` : 'none';
+            } else {
+                titleOverlay.style.display = 'none';
+            }
 
             document.getElementById('p_h_name').innerText=document.getElementById('i_h_name').value;
             document.getElementById('p_b_name').innerText=document.getElementById('i_b_name').value;
@@ -551,7 +599,7 @@
             
             setTimeout(() => {
                 if (window.MathJax) {
-                    MathJax.typesetPromise([document.getElementById('prev_q_text'), document.getElementById('prev_q_btns')]);
+                    MathJax.typesetPromise([document.getElementById('prev_q_text'), document.getElementById('prev_q_btns'), document.getElementById('prev_title_text')]);
                 }
             }, 50);
 
@@ -592,6 +640,8 @@
             const panelRgb = hex2rgb(d.design.panelCol);
             const plateRgb = hex2rgb(d.design.plateBg);
             const timerBgRgb = hex2rgb(d.design.timerBg);
+            const titleBgRgb = hex2rgb(d.design.titleBgCol);
+            const playBtnRgb = hex2rgb(d.design.playBtnCol);
 
             const getAnimRule=o=>{if(o.anim==='none')return'';let dur=(11-o.speed)*0.5;if(['shake','wobble'].includes(o.anim))dur*=.5;let timing='ease-in-out';if(['glitch'].includes(o.anim))timing=`steps(${Math.round(dur*10)})`;if(['shake','spin','flip'].includes(o.anim))timing='linear';return`animation:fx-${o.anim} ${dur}s infinite ${timing};transform-origin:${o.anim==='swing'?'top center':'center'};`;};
             
@@ -639,7 +689,7 @@ document.addEventListener('DOMContentLoaded',initGame);
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rajdhani:wght@700&family=Montserrat:wght@900&display=swap');
 :root{ --primary: #8A2BE2; --red: #ff3b30; --green: #00FF88; --magenta: #e521e5;}
-body{margin:0;overflow:hidden;font-family:'Rajdhani',sans-serif;user-select:none;width:100%;height:100vh;background-color:${d.design.bgCol};background-size:cover;background-position:center;transition:background-image 0.5s ease-in-out; background-image:${this.locations.length>0?`linear-gradient(rgba(${bgRgb}, ${d.design.bgOp/100}), rgba(${bgRgb}, ${d.design.bgOp/100})), url(${this.locations[0].data})`:'none'}; display: flex; align-items: center; justify-content: center;}
+body{margin:0;overflow:hidden;font-family:${d.design.fontFam};user-select:none;width:100%;height:100vh;background-color:${d.design.bgCol};background-size:cover;background-position:center;transition:background-image 0.5s ease-in-out; background-image:${this.locations.length>0?`linear-gradient(rgba(${bgRgb}, ${d.design.bgOp/100}), rgba(${bgRgb}, ${d.design.bgOp/100})), url(${this.locations[0].data})`:'none'}; display: flex; align-items: center; justify-content: center;}
 * { box-sizing: border-box; }
 @keyframes float-up-fade { 0% { transform: translateY(0) scale(0.8); opacity: 1; } 100% { transform: translateY(-60px) scale(1.2); opacity: 0; } }
 @keyframes fx-idle{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}@keyframes fx-float{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-15px) rotate(2deg)}}@keyframes fx-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}@keyframes fx-shake{0%{transform:translate(1px, 1px)}20%{transform:translate(-3px, 0px)}40%{transform:translate(1px, -1px)}60%{transform:translate(-3px, 1px)}80%{transform:translate(-1px, -1px)}100%{transform:translate(1px, -2px)}}@keyframes fx-glitch{0%{transform:translate(0)}20%{transform:translate(-2px, 2px)}40%{transform:translate(-2px, -2px)}60%{transform:translate(2px, 2px)}80%{transform:translate(2px, -2px)}100%{transform:translate(0)}}@keyframes fx-spin{0%{transform:rotateY(0deg)}100%{transform:rotateY(360deg)}}@keyframes fx-neon{0%,100%{opacity:1;filter:brightness(1)}50%{opacity:0.8;filter:brightness(1.5)}}@keyframes fx-wobble{0%,100%{transform:rotate(0deg)}25%{transform:rotate(-5deg)}75%{transform:rotate(5deg)}}@keyframes fx-swing{0%{transform:rotate(0deg)}20%{transform:rotate(15deg)}40%{transform:rotate(-10deg)}60%{transform:rotate(5deg)}80%{transform:rotate(-5deg)}100%{transform:rotate(0deg)}}@keyframes fx-bounce{0%,20%,50%,80%,100%{transform:translateY(0)}40%{transform:translateY(-30px)}60%{transform:translateY(-15px)}}@keyframes fx-flip{0%{transform:rotateY(0deg)}100%{transform:rotateY(360deg)}}@keyframes fx-ghost{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(1.05)}}
@@ -652,18 +702,18 @@ body{margin:0;overflow:hidden;font-family:'Rajdhani',sans-serif;user-select:none
     max-height: calc(100vw * 9 / 16);
     aspect-ratio: 16 / 9;
 }
-.overlay{position:fixed;inset:0;background:#12101E;z-index:99;display:flex;flex-direction:column;align-items:center;justify-content:center;}
-.big-title{font-family:'Press Start 2P',cursive;font-size:clamp(24px,5vw,40px);color:#00e5ff;text-align:center;margin-bottom:40px;text-shadow:4px 4px 0 var(--primary);line-height:1.5;}
-.play-btn{background:transparent;color:#fff;padding:15px 50px;border:2px solid #fff;border-radius:50px;font-size:24px;font-weight:900;cursor:pointer;transition:0.3s;animation:fx-pulse 2s infinite;}
-.play-btn:hover{background:#00e5ff;color:#000;border-color:#00e5ff;box-shadow:0 0 30px #00e5ff;}
+.overlay{position:fixed;inset:0;background:rgba(${titleBgRgb}, ${d.design.titleBgOp/100});z-index:99;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.big-title{font-family:${d.design.fontFam};font-size:clamp(24px,5vw,40px);color:#00e5ff;text-align:center;margin-bottom:40px;text-shadow:4px 4px 0 var(--primary);line-height:1.5;}
+.play-btn{font-family:${d.design.fontFam};background:rgba(${playBtnRgb}, ${d.design.playBtnOp/100});color:#fff;padding:15px 50px;border:2px solid ${d.design.playBtnCol};border-radius:50px;font-size:24px;font-weight:900;cursor:pointer;transition:0.3s;animation:fx-pulse 2s infinite;box-shadow:${d.design.playBtnGlow > 0 ? `0 0 ${d.design.playBtnGlow}px ${d.design.playBtnGlowCol}` : 'none'};}
+.play-btn:hover{filter:brightness(1.2);transform:scale(1.05);}
 .hud{padding:10px 15px;display:flex;justify-content:space-between;align-items:flex-start;width:100%;z-index:10;gap:10px;}
 .ui-element { background:rgba(${plateRgb},${d.design.plateOp/100}); border-radius: 20px; box-shadow: 0 0 10px ${d.design.plateBg}, inset 0 0 8px rgba(0,0,0,0.5); padding: 8px 15px;}
 .player-info { display:flex; align-items: center; gap: 10px; flex: 1; max-width: 350px;}
-.char-name{color:#fff;font-weight:700;font-size:18px;text-shadow:1px 1px 0 #000;white-space:nowrap; }
+.char-name{color:#fff;font-weight:700;font-size:18px;text-shadow:1px 1px 0 #000;white-space:nowrap; font-family:${d.design.fontFam};}
 .hp-bar{width:100%;height:14px;background:rgba(0,0,0,0.7);border-radius:7px;border:1px solid ${d.design.hpBorder};box-shadow:${d.design.hpGlow > 0 ? `0 0 ${d.design.hpGlow}px ${d.design.hpGlowCol}` : 'none'};overflow:hidden;}
 .hp-fill{height:100%;transition:width 0.5s ease-out, background-color 0.5s; border-radius: 7px;}
 .timer-wrap { display: flex; flex-direction: column; align-items: center; gap: 8px;}
-.timer{ flex-shrink:0; font-family:'Rajdhani',sans-serif;font-weight:700;font-size:24px;color:${d.design.timerTxt}; letter-spacing: 2px; text-shadow: 0 0 8px ${d.design.timerTxt}; width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; padding-top: 5px; background:rgba(${timerBgRgb},0.8); border: 2px solid ${d.design.timerBg}; box-shadow: 0 0 10px ${d.design.timerBg}; }
+.timer{ flex-shrink:0; font-family:${d.design.fontFam};font-weight:700;font-size:24px;color:${d.design.timerTxt}; letter-spacing: 2px; text-shadow: 0 0 8px ${d.design.timerTxt}; width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; padding-top: 5px; background:rgba(${timerBgRgb},0.8); border: 2px solid ${d.design.timerBg}; box-shadow: 0 0 10px ${d.design.timerBg}; }
 .media-controls { display: flex; gap: 10px; }
 .media-btn { background: rgba(35,31,52,0.8); color: #fff; border: 1px solid var(--primary); border-radius: 50%; width: 32px; height: 32px; font-size: 16px; cursor: pointer; display:flex; align-items: center; justify-content: center;}
 .stage-area{flex:1;position:relative;overflow:hidden;}
@@ -676,7 +726,7 @@ body{margin:0;overflow:hidden;font-family:'Rajdhani',sans-serif;user-select:none
 .boss-wrap{right:${d.boss.posX}%;}
 .char{max-width:100%;max-height:100%;object-fit:contain;transition:filter 0.5s, opacity 0.5s;}
 #projectile { position: absolute; width: 30px; height: 30px; border-radius: 50%; opacity: 0; z-index: 100; transition: left 0.5s linear, top 0.5s linear, transform 0.2s, opacity 0.2s; pointer-events: none; transform-origin: center; margin-left: -15px; margin-top: -15px; }
-.score-popup{position:fixed;z-index:101;opacity:0;font-family:'Press Start 2P',cursive;font-size:20px;transform:translateX(-50%);pointer-events:none;}
+.score-popup{position:fixed;z-index:101;opacity:0;font-family:${d.design.fontFam};font-size:20px;transform:translateX(-50%);pointer-events:none;}
 .score-popup.show{animation:float-up-fade 1s ease-out forwards;}
 .ui-panel{position:absolute; bottom:0; left:0; right:0; background:rgba(${panelRgb},${d.design.panelOp/100});padding:20px;border-top:4px solid ${d.design.sepLine};display:flex;flex-direction:column;align-items:center;gap:15px;min-height:20%;box-shadow:0 -10px 50px rgba(0,0,0,0.5);z-index:20;}
 .q-text{color:#fff;font-size:${d.design.qFontSize}px;font-weight:700;text-align:center;font-family:${d.design.fontFam};}
@@ -687,7 +737,7 @@ body{margin:0;overflow:hidden;font-family:'Rajdhani',sans-serif;user-select:none
 .inp-area{display:flex;flex-direction:column;align-items:center;gap:10px;position:relative;}
 .inp-row{display:flex;gap:10px;}
 input[type=text]{padding:15px;border-radius:6px;border:2px solid #fff;font-family:${d.design.fontFam};font-weight:700;background:#000;color:#fff;font-size:${d.design.aFontSize}px;outline:none; transition: 0.3s;}
-.correct-answer-hint { color: var(--green); margin-top: 5px; font-size: 18px; font-weight: 700; text-align: center; text-shadow: 0 0 5px #000;}
+.correct-answer-hint { color: var(--green); margin-top: 5px; font-size: 18px; font-weight: 700; text-align: center; text-shadow: 0 0 5px #000; font-family:${d.design.fontFam};}
 </style></head><body>
 ${this.musicFile?`<audio id="bg-music" src="${this.musicFile.data}" loop></audio>`:''}
 <div id="projectile"></div>
