@@ -24,13 +24,10 @@
         .fx-btn:hover { border-color: var(--primary); color: #fff; background: rgba(138, 43, 226, 0.3); }
         .fx-btn:disabled { opacity: 0.3; cursor: not-allowed; }
         .fx-btn.active { background: var(--cyan); color: #000; border-color: var(--cyan); box-shadow: 0 0 10px rgba(0, 210, 255, 0.5); }
-        .fx-input, .fx-textarea, .fx-select { background: var(--input-bg); border: 1px solid var(--border); color: #fff; padding: 10px; width: 100%; font-size: 12px; border-radius: 6px; font-family: monospace; transition: 0.3s; margin-bottom: 5px; }
-        .fx-input:focus, .fx-textarea:focus, .fx-select:focus { border-color: var(--cyan); box-shadow: 0 0 8px rgba(0, 210, 255, 0.3); }
+        .fx-input, .fx-textarea { background: var(--input-bg); border: 1px solid var(--border); color: #fff; padding: 10px; width: 100%; font-size: 12px; border-radius: 6px; font-family: monospace; transition: 0.3s; margin-bottom: 5px; }
+        .fx-input:focus, .fx-textarea:focus { border-color: var(--cyan); box-shadow: 0 0 8px rgba(0, 210, 255, 0.3); }
         .fx-input.correct { border-color: var(--green); box-shadow: 0 0 8px var(--green); }
         .fx-input.wrong { border-color: var(--red); box-shadow: 0 0 8px var(--red); }
-        input[type="color"] { padding: 0; width: 24px; height: 24px; border: none; background: none; border-radius: 50%; cursor: pointer; }
-        input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
-        input[type="color"]::-webkit-color-swatch { border-radius: 50%; border: 2px solid var(--border); }
         .view-editor { flex: 1; display: flex; opacity: 1; pointer-events: auto; }
         .sidebar { width: 350px; background: var(--bg-panel); border-right: 2px solid #000; display: flex; flex-direction: column; z-index: 10; box-shadow: 5px 0 25px rgba(0,0,0,0.5); }
         .sidebar-content { flex: 1; overflow-y: auto; padding: 15px; }
@@ -51,18 +48,22 @@
         input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; cursor: pointer; background: rgba(0,0,0,0.5); border-radius: 2px; border: 1px solid var(--border); }
         .param-row { display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: #aaa; margin-bottom: 5px; }
         .stage { flex: 1; position: relative; background-color: #222222; background-size: cover; background-position: center; display: flex; flex-direction: column; justify-content: flex-start; overflow: hidden; }
-        .stage::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0, var(--bg-overlay-opacity, 0.3)); z-index: 1; pointer-events: none; }
         .preview-hud { padding: 15px 20px; z-index: 5; display: flex; justify-content: space-between; width: 100%; align-items: center; gap: 15px; position: relative; }
         .hud-player { display: flex; align-items: center; gap: 10px; min-width: 0; }
         .hud-player.right { flex-direction: row-reverse; }
-        .hp-bar-preview { flex-shrink: 1; width: 100%; min-width: 80px; max-width: 200px; height: 8px; background: rgba(0,0,0,0.5); border-radius: 4px; border: 1px solid #444; overflow: hidden; transition: 0.3s; }
+        .hp-bar-preview { flex-shrink: 1; width: 100%; min-width: 80px; max-width: 200px; height: 8px; background: rgba(0,0,0,0.5); border-radius: 4px; border: 1px solid #444; overflow: hidden; }
         .hp-fill-preview { height: 100%; transition: 0.3s; }
         .hud-char-name { font-size: 16px; font-weight: 900; color: #fff; text-shadow: 1px 1px 0 #000; white-space: nowrap; }
         .timer-preview { flex-shrink: 0; font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 28px; background: rgba(0,0,0,0.5); color: #ffd700; padding: 2px 12px; border-radius: 6px; letter-spacing: 2px; border: 1px solid rgba(255,255,255,0.2); }
         .battle-area { flex: 1; display: flex; justify-content: space-around; align-items: center; z-index: 2; position: absolute; inset: 0; padding-bottom: 180px; }
-        .char-box { width: 40%; height: auto; display: flex; align-items: flex-end; justify-content: center; position: absolute; transition: bottom 0.3s ease-out, left 0.3s ease-out, right 0.3s ease-out; }
+        
+        .char-box { 
+            width: 40%; height: auto; display: flex; align-items: flex-end; justify-content: center; 
+            position: absolute; transition: bottom 0.3s ease-out, left 0.3s ease-out, right 0.3s ease-out;
+        }
+        
         .char-img { max-width: 100%; max-height: 100%; object-fit: contain; transition: 0.3s; }
-        .quest-dock { position: absolute; bottom: 0; left: 0; right: 0; background: var(--bg-panel); border-top: 3px solid var(--cyan); padding: 15px; z-index: 10; min-height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; transition: background-color 0.3s; }
+        .quest-dock { position: absolute; bottom: 0; left: 0; right: 0; background: var(--bg-panel); border-top: 3px solid var(--cyan); padding: 15px; z-index: 10; min-height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
         .q-preview-text { color: #fff; font-size: 18px; font-weight: 700; text-align: center; margin-top: 20px; }
         .q-preview-btns { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
         .q-dummy-btn { background: #333; color: #fff; padding: 8px 20px; border: 2px solid #555; border-radius: 5px; font-weight: 700; font-size: 12px; cursor: pointer; transition: 0.2s; }
@@ -74,18 +75,34 @@
         .gen-panel { padding: 15px; border-top: 2px solid #000; background: var(--bg-panel); }
         .btn-generate { background: var(--green); color: #000; padding: 12px 25px; width: 100%; font-size: 14px; font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; border: none; border-radius: 6px; cursor: pointer; box-shadow: 0 0 15px var(--green); transition: 0.3s; }
         .btn-generate:hover { box-shadow: 0 0 30px var(--green); filter: brightness(1.2); }
-        .modal-btn { background: #8a4fff; border: 1px solid #b388ff; color: #ffffff; padding: 10px 25px; border-radius: 6px; font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 14px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; outline: none; }
-        .modal-btn:hover { transform: scale(1.1); background: #9d6bfa; box-shadow: 0 0 20px rgba(179, 136, 255, 0.8); border-color: #d1b3ff; }
+
+        .modal-btn { 
+            background: #8a4fff; 
+            border: 1px solid #b388ff; 
+            color: #ffffff; 
+            padding: 10px 25px; 
+            border-radius: 6px; 
+            font-family: 'Rajdhani', sans-serif; 
+            font-weight: 700; 
+            font-size: 14px; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            text-transform: uppercase; 
+            outline: none; 
+        }
+        .modal-btn:hover { 
+            transform: scale(1.1); 
+            background: #9d6bfa; 
+            box-shadow: 0 0 20px rgba(179, 136, 255, 0.8); 
+            border-color: #d1b3ff; 
+        }
+
         @keyframes fx-idle{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}@keyframes fx-float{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-15px) rotate(2deg)}}@keyframes fx-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}@keyframes fx-shake{0%{transform:translate(1px, 1px)}20%{transform:translate(-3px, 0px)}40%{transform:translate(1px, -1px)}60%{transform:translate(-3px, 1px)}80%{transform:translate(-1px, -1px)}100%{transform:translate(1px, -2px)}}@keyframes fx-glitch{0%{transform:translate(0)}20%{transform:translate(-2px, 2px)}40%{transform:translate(-2px, -2px)}60%{transform:translate(2px, 2px)}80%{transform:translate(2px, -2px)}100%{transform:translate(0)}}@keyframes fx-spin{0%{transform:rotateY(0deg)}100%{transform:rotateY(360deg)}}@keyframes fx-neon{0%,100%{opacity:1;filter:brightness(1)}50%{opacity:0.8;filter:brightness(1.5)}}@keyframes fx-wobble{0%,100%{transform:rotate(0deg)}25%{transform:rotate(-5deg)}75%{transform:rotate(5deg)}}@keyframes fx-swing{0%{transform:rotate(0deg)}20%{transform:rotate(15deg)}40%{transform:rotate(-10deg)}60%{transform:rotate(5deg)}80%{transform:rotate(-5deg)}100%{transform:rotate(0deg)}}@keyframes fx-bounce{0%,20%,50%,80%,100%{transform:translateY(0)}40%{transform:translateY(-30px)}60%{transform:translateY(-15px)}}@keyframes fx-flip{0%{transform:rotateY(0deg)}100%{transform:rotateY(360deg)}}@keyframes fx-ghost{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(1.05)}}
     </style>
     <div class="view-editor">
         <div class="sidebar">
             <div class="sidebar-content">
-                <div class="main-tabs">
-                    <button class="main-tab-link active" onclick="app.setMainTab('chars')">ПЕРСОНАЖИ</button>
-                    <button class="main-tab-link" onclick="app.setMainTab('quests')">ЗАДАНИЯ</button>
-                    <button class="main-tab-link" onclick="app.setMainTab('ui')">ИНТЕРФЕЙС</button>
-                </div>
+                <div class="main-tabs"><button class="main-tab-link active" onclick="app.setMainTab('chars')">ПЕРСОНАЖИ</button><button class="main-tab-link" onclick="app.setMainTab('quests')">ЗАДАНИЯ</button></div>
                 <div class="section-content show" id="sec_chars">
                     <div class="sub-tabs"><button class="sub-tab-link active" onclick="app.setCharTab('hero')">ГЕРОЙ</button><button class="sub-tab-link" onclick="app.setCharTab('boss')">БОСС</button></div>
                     <div id="cfg_hero">
@@ -99,9 +116,17 @@
                             <div style="display:flex; gap:5px;"><input type="text" class="fx-input" id="i_h_url" placeholder="Вставьте URL"><button class="fx-btn" style="flex-shrink:0;" onclick="app.handleImageURL(document.getElementById('i_h_url').value, 'hero')">ИСПОЛЬЗОВАТЬ</button></div>
                         </div>
                         <div class="control-group"><span class="control-label">Анимация</span><div class="anim-grid" id="ag_hero"></div></div>
-                        <div class="control-group"><span class="control-label">Параметры</span><div class="param-row"><span>Размер</span><input type="range" id="r_h_size" min="50" max="150" value="100" style="width:60%"></div><div class="param-row"><span>Свечение</span><input type="range" id="r_h_glow" min="0" max="50" value="0" style="width:60%"><input type="color" id="c_h_glow" value="#00e5ff"></div><div class="param-row"><span>Скорость анимации</span><input type="range" id="r_h_speed" min="1" max="10" value="3" style="width:60%"></div>
-                            <div class="param-row"><span>Приземление</span><input type="range" id="r_h_landing" min="0" max="40" value="15" style="width:60%"><span id="val_h_landing" style="width:10%; text-align: right;">15%</span></div>
-                            <div class="param-row"><span>Отступ от края</span><input type="range" id="r_h_posx" min="0" max="45" value="10" style="width:60%"><span id="val_h_posx" style="width:10%; text-align: right;">10%</span></div>
+                        <div class="control-group"><span class="control-label">Параметры</span><div class="param-row"><span>Размер</span><input type="range" id="r_h_size" min="50" max="150" value="100" style="width:60%"></div><div class="param-row"><span>Свечение</span><input type="range" id="r_h_glow" min="0" max="50" value="0" style="width:60%"><input type="color" id="c_h_glow" value="#00e5ff" style="border:none;width:20px;height:20px;background:none;padding:0;"></div><div class="param-row"><span>Скорость анимации</span><input type="range" id="r_h_speed" min="1" max="10" value="3" style="width:60%"></div>
+                            <div class="param-row">
+                                <span>Приземление</span>
+                                <input type="range" id="r_h_landing" min="0" max="40" value="15" style="width:60%">
+                                <span id="val_h_landing" style="width:10%; text-align: right;">15%</span>
+                            </div>
+                            <div class="param-row">
+                                <span>Отступ от края</span>
+                                <input type="range" id="r_h_posx" min="0" max="45" value="10" style="width:60%">
+                                <span id="val_h_posx" style="width:10%; text-align: right;">10%</span>
+                            </div>
                         </div>
                     </div>
                     <div id="cfg_boss" style="display:none;">
@@ -115,9 +140,17 @@
                             <div style="display:flex; gap:5px;"><input type="text" class="fx-input" id="i_b_url" placeholder="Вставьте URL"><button class="fx-btn" style="flex-shrink:0;" onclick="app.handleImageURL(document.getElementById('i_b_url').value, 'boss')">ИСПОЛЬЗОВАТЬ</button></div>
                         </div>
                         <div class="control-group"><span class="control-label">Анимация</span><div class="anim-grid" id="ag_boss"></div></div>
-                        <div class="control-group"><span class="control-label">Параметры</span><div class="param-row"><span>Размер</span><input type="range" id="r_b_size" min="50" max="150" value="100" style="width:60%"></div><div class="param-row"><span>Свечение</span><input type="range" id="r_b_glow" min="0" max="50" value="0" style="width:60%"><input type="color" id="c_b_glow" value="#ff0055"></div><div class="param-row"><span>Скорость анимации</span><input type="range" id="r_b_speed" min="1" max="10" value="3" style="width:60%"></div>
-                            <div class="param-row"><span>Приземление</span><input type="range" id="r_b_landing" min="0" max="40" value="15" style="width:60%"><span id="val_b_landing" style="width:10%; text-align: right;">15%</span></div>
-                            <div class="param-row"><span>Отступ от края</span><input type="range" id="r_b_posx" min="0" max="45" value="10" style="width:60%"><span id="val_b_posx" style="width:10%; text-align: right;">10%</span></div>
+                        <div class="control-group"><span class="control-label">Параметры</span><div class="param-row"><span>Размер</span><input type="range" id="r_b_size" min="50" max="150" value="100" style="width:60%"></div><div class="param-row"><span>Свечение</span><input type="range" id="r_b_glow" min="0" max="50" value="0" style="width:60%"><input type="color" id="c_b_glow" value="#ff0055" style="border:none;width:20px;height:20px;background:none;padding:0;"></div><div class="param-row"><span>Скорость анимации</span><input type="range" id="r_b_speed" min="1" max="10" value="3" style="width:60%"></div>
+                            <div class="param-row">
+                                <span>Приземление</span>
+                                <input type="range" id="r_b_landing" min="0" max="40" value="15" style="width:60%">
+                                <span id="val_b_landing" style="width:10%; text-align: right;">15%</span>
+                            </div>
+                            <div class="param-row">
+                                <span>Отступ от края</span>
+                                <input type="range" id="r_b_posx" min="0" max="45" value="10" style="width:60%">
+                                <span id="val_b_posx" style="width:10%; text-align: right;">10%</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -138,41 +171,42 @@
                         <div class="param-row"><span>Таймер (мин)</span><input type="checkbox" id="chk_timer" checked></div>
                         <input type="range" id="r_timer" min="1" max="30" value="5"><div style="text-align:right;font-size:10px;color:var(--cyan);"><span id="val_timer">5</span> мин</div>
                     </div>
+                    
+                    <div class="control-group">
+                        <span class="control-label">Дизайн и Интерфейс</span>
+                        <div class="param-row"><span>Цвет фона</span><input type="color" id="c_bg_col" value="#12101e" style="border:none;width:20px;height:20px;background:none;padding:0;"></div>
+                        <div class="param-row"><span>Затемнение фона</span><input type="range" id="r_bg_op" min="0" max="100" value="0" style="width:60%"></div>
+                        
+                        <div class="param-row"><span>Цвет кнопок</span><input type="color" id="c_btn_col" value="#333333" style="border:none;width:20px;height:20px;background:none;padding:0;"></div>
+                        <div class="param-row"><span>Свечение кнопок</span><input type="range" id="r_btn_glow" min="0" max="50" value="0" style="width:40%"><input type="color" id="c_btn_glow" value="#00e5ff" style="border:none;width:20px;height:20px;background:none;padding:0;"></div>
+
+                        <div class="param-row"><span>Нижняя панель</span><input type="color" id="c_panel_col" value="#12101e" style="border:none;width:20px;height:20px;background:none;padding:0;"></div>
+                        <div class="param-row"><span>Прозрачность панели</span><input type="range" id="r_panel_op" min="0" max="100" value="95" style="width:60%"></div>
+
+                        <div class="param-row"><span>Цвет шкал (Герой/Босс)</span>
+                            <div style="display:flex;gap:5px;">
+                                <input type="color" id="c_hp_hero" value="#00ff88" style="border:none;width:20px;height:20px;background:none;padding:0;">
+                                <input type="color" id="c_hp_boss" value="#ff3b30" style="border:none;width:20px;height:20px;background:none;padding:0;">
+                            </div>
+                        </div>
+                        <div class="param-row"><span>Рамка шкал</span><input type="color" id="c_hp_border" value="#111111" style="border:none;width:20px;height:20px;background:none;padding:0;"></div>
+                        <div class="param-row"><span>Свечение шкал</span><input type="range" id="r_hp_glow" min="0" max="50" value="0" style="width:40%"><input type="color" id="c_hp_glow" value="#8a2be2" style="border:none;width:20px;height:20px;background:none;padding:0;"></div>
+
+                        <div class="param-row"><span>Шрифт</span>
+                            <select id="s_font" class="fx-input" style="width:50%; padding: 4px; margin: 0; font-size:10px;">
+                                <option value="'Montserrat', sans-serif">Montserrat</option>
+                                <option value="'Rajdhani', sans-serif">Rajdhani</option>
+                                <option value="'Press Start 2P', cursive">Press Start 2P</option>
+                                <option value="Arial, sans-serif">Arial</option>
+                                <option value="'Courier New', monospace">Courier New</option>
+                            </select>
+                        </div>
+                        <div class="param-row"><span>Размер текста</span><input type="range" id="r_font_size" min="12" max="48" value="24" style="width:60%"></div>
+                    </div>
+
                     <div class="control-group"><span class="control-label">Язык Игры</span><div class="sub-tabs" style="padding:0 0 10px 0;"><button class="sub-tab-link active" onclick="app.setGameLang('ru')">RU</button><button class="sub-tab-link" onclick="app.setGameLang('en')">EN</button></div><div id="lang_ru_fields"><label style="font-size:9px;color:#888;">Заголовок ( | = перенос):</label><input type="text" class="fx-input" id="i_title_ru" value="БИТВА|С БОССОМ"><label style="font-size:9px;color:#888;">Победа:</label><input type="text" class="fx-input" id="i_win_msg_ru" value="ТЫ ПОБЕДИЛ!"><label style="font-size:9px;color:#888;">Поражение:</label><input type="text" class="fx-input" id="i_lose_msg_ru" value="ТЫ ПРОИГРАЛ!"><label style="font-size:9px;color:#888;">Кнопка старт:</label><input type="text" class="fx-input" id="i_play_btn_ru" value="ИГРАТЬ"></div><div id="lang_en_fields" style="display:none;"><label style="font-size:9px;color:#888;">Title ( | = new line):</label><input type="text" class="fx-input" id="i_title_en" value="BOSS|BATTLE"><label style="font-size:9px;color:#888;">Win:</label><input type="text" class="fx-input" id="i_win_msg_en" value="YOU WIN!"><label style="font-size:9px;color:#888;">Lose:</label><input type="text" class="fx-input" id="i_lose_msg_en" value="YOU LOSE!"><label style="font-size:9px;color:#888;">Start Button:</label><input type="text" class="fx-input" id="i_play_btn_en" value="PLAY"></div></div>
                     <div id="quest-list-container"><div class="control-group"><span class="control-label">Список заданий</span><div id="quest-list" style="display:flex;flex-direction:column;gap:5px;margin-bottom:10px;"></div><button class="fx-btn" style="width:100%" onclick="app.addQuest()">+ ДОБАВИТЬ ЗАДАНИЕ</button></div></div>
                     <div id="quest-editor-panel"><div class="control-group"><span class="control-label" id="editor-title">РЕДАКТОР</span><div class="sub-tabs"><button class="sub-tab-link active" onclick="app.setQType('choice')" id="b_choice">ВЫБОР</button><button class="sub-tab-link" onclick="app.setQType('input')" id="b_input">ВВОД</button></div><span class="control-label">Текст вопроса</span><textarea class="fx-textarea" id="i_q_text" rows="2"></textarea><div id="area_choice"><span class="control-label" style="color:var(--green)">Верный ответ</span><input type="text" class="fx-input" id="i_c_ans"><span class="control-label" style="color:var(--primary)">Неверные ответы</span><input type="text" class="fx-input" id="i_w1"><input type="text" class="fx-input" id="i_w2"></div><div id="area_input" style="display:none"><span class="control-label" style="color:var(--green)">Правильный текст</span><input type="text" class="fx-input" id="i_in_ans"></div><button class="fx-btn" style="width:100%;margin-top:10px;background:var(--green);color:#000;border-color:var(--green)" onclick="app.saveQuest()">СОХРАНИТЬ</button></div></div>
-                </div>
-                <div class="section-content" id="sec_ui">
-                     <div class="control-group">
-                        <span class="control-label">Фон</span>
-                        <div class="param-row"><span>Цвет фона</span><input type="color" id="c_bg_color" value="#12101E"></div>
-                        <div class="param-row"><span>Затемнение картинки</span><input type="range" id="r_bg_opacity" min="0" max="100" value="30" style="width:60%"></div>
-                    </div>
-                    <div class="control-group">
-                        <span class="control-label">Нижняя панель</span>
-                        <div class="param-row"><span>Цвет панели</span><input type="color" id="c_dock_color" value="#12101e"></div>
-                        <div class="param-row"><span>Прозрачность</span><input type="range" id="r_dock_opacity" min="0" max="100" value="95" style="width:60%"></div>
-                    </div>
-                     <div class="control-group">
-                        <span class="control-label">Кнопки ответов</span>
-                        <div class="param-row"><span>Цвет кнопки</span><input type="color" id="c_btn_color" value="#333333"></div>
-                        <div class="param-row"><span>Цвет рамки</span><input type="color" id="c_btn_border_color" value="#555555"></div>
-                        <div class="param-row"><span>Свечение</span><input type="range" id="r_btn_glow" min="0" max="25" value="0" style="width:60%"><input type="color" id="c_btn_glow_color" value="#00D2FF"></div>
-                    </div>
-                     <div class="control-group">
-                        <span class="control-label">Прогресс-бары</span>
-                        <div class="param-row"><span>Цвет Героя</span><input type="color" id="c_bar_hero_color" value="#00FF88"></div>
-                        <div class="param-row"><span>Цвет Босса</span><input type="color" id="c_bar_boss_color" value="#ff3b30"></div>
-                        <div class="param-row"><span>Цвет рамки</span><input type="color" id="c_bar_frame_color" value="#444444"></div>
-                        <div class="param-row"><span>Свечение</span><input type="range" id="r_bar_glow" min="0" max="20" value="0" style="width:60%"></div>
-                    </div>
-                    <div class="control-group">
-                        <span class="control-label">Шрифты</span>
-                        <span class="control-label">Шрифт текста</span>
-                        <select id="s_font_family" class="fx-select"></select>
-                        <span class="control-label" style="margin-top:10px;">Размер текста (px)</span>
-                        <input type="range" id="r_font_size" min="12" max="32" value="18">
-                    </div>
                 </div>
             </div>
             <div class="gen-panel"><button class="btn-generate" onclick="app.generate()" id="b_gen">СКОПИРОВАТЬ КОД</button></div>
@@ -187,7 +221,7 @@
                 <div class="char-box" id="prev_hero_box"><img src="" class="char-img" id="img_hero"></div>
                 <div class="char-box" id="prev_boss_box"><img src="" class="char-img" id="img_boss"></div>
             </div>
-            <div class="quest-dock" id="quest_dock_preview">
+            <div class="quest-dock">
                  <div class="q-preview-nav" style="position: absolute; top: 10px; width: 100%; display: flex; justify-content: space-between; padding: 0 20px;">
                     <button id="prev_q_btn" class="fx-btn" onclick="app.prevPreviewQuest()">◀</button>
                     <button id="next_q_btn" class="fx-btn" onclick="app.nextPreviewQuest()">▶</button>
@@ -207,39 +241,18 @@
             timer:5,
             timerOn:true,
             titleScreenOn:true,
-            ui: {
-                bgColor: '#12101E', bgOpacity: 0.3, dockBg: '#12101e', dockOpacity: 0.95,
-                btnBg: '#333333', btnBorder: '#555555', btnGlow: '#00D2FF', btnGlowP: 0,
-                barHero: '#00FF88', barBoss: '#ff3b30', barFrame: '#444444', barGlowP: 0,
-                fontFamily: "'Montserrat', sans-serif", fontSize: 18
-            }
+            design: { bgCol: '#12101e', bgOp: 0, btnCol: '#333333', btnGlow: 0, btnGlowCol: '#00e5ff', panelCol: '#12101e', panelOp: 95, hpHero: '#00ff88', hpBoss: '#ff3b30', hpBorder: '#111111', hpGlow: 0, hpGlowCol: '#8a2be2', fontFam: "'Montserrat', sans-serif", fontSize: 24 }
         },
-        fonts: [
-            {name: 'Montserrat', value: "'Montserrat', sans-serif"}, 
-            {name: 'Press Start 2P', value: "'Press Start 2P', cursive"}, 
-            {name: 'Rajdhani', value: "'Rajdhani', sans-serif"}, 
-            {name: 'Monospace', value: "monospace"}
-        ],
         anims:[{id:'idle',name:'Покой'},{id:'float',name:'Парение'},{id:'pulse',name:'Пульс'},{id:'shake',name:'Тряска'},{id:'glitch',name:'Глюк'},{id:'spin',name:'Вращение'},{id:'neon',name:'Неон'},{id:'wobble',name:'Шатание'},{id:'swing',name:'Качание'},{id:'bounce',name:'Прыжок'},{id:'flip',name:'Переворот'},{id:'ghost',name:'Призрак'}],
         
         init(){
             this.renderAnims('hero');
             this.renderAnims('boss');
-            this.populateFonts();
             this.bindEvents();
             this.addQuest(true);
             this.updatePreview();
         },
-        populateFonts() {
-            const select = document.getElementById('s_font_family');
-            this.fonts.forEach(font => {
-                const option = document.createElement('option');
-                option.value = font.value;
-                option.innerText = font.name;
-                select.appendChild(option);
-            });
-        },
-        setMainTab(t){document.querySelectorAll('.main-tab-link').forEach(e=>e.classList.remove('active'));document.querySelector(`[onclick="app.setMainTab('${t}')"]`).classList.add('active');document.getElementById('sec_chars').classList.toggle('show',t==='chars');document.getElementById('sec_quests').classList.toggle('show',t==='quests');document.getElementById('sec_ui').classList.toggle('show',t==='ui');},
+        setMainTab(t){document.querySelectorAll('.main-tab-link').forEach(e=>e.classList.remove('active'));document.querySelector(`[onclick="app.setMainTab('${t}')"]`).classList.add('active');document.getElementById('sec_chars').classList.toggle('show',t==='chars');document.getElementById('sec_quests').classList.toggle('show',t==='quests');},
         setCharTab(t){document.querySelector('#sec_chars .sub-tab-link.active').classList.remove('active');document.querySelector(`[onclick="app.setCharTab('${t}')"]`).classList.add('active');document.getElementById('cfg_hero').style.display=t==='hero'?'block':'none';document.getElementById('cfg_boss').style.display=t==='boss'?'block':'none';},
         setQType(t){document.querySelector('#quest-editor-panel #b_choice').className=t==='choice'?'sub-tab-link active':'sub-tab-link';document.querySelector('#quest-editor-panel #b_input').className=t==='input'?'sub-tab-link active':'sub-tab-link';document.querySelector('#quest-editor-panel #area_choice').style.display=t==='choice'?'block':'none';document.querySelector('#quest-editor-panel #area_input').style.display=t==='input'?'block':'none';},
         setGameLang(l){this.gameLang=l;const btnContainer=document.querySelector('#sec_quests .sub-tabs');btnContainer.children[0].classList.toggle('active',l==='ru');btnContainer.children[1].classList.toggle('active',l==='en');document.getElementById('lang_ru_fields').style.display=l==='ru'?'block':'none';document.getElementById('lang_en_fields').style.display=l==='en'?'block':'none';},
@@ -249,146 +262,261 @@
             return new Promise(async (resolve) => {
                 const img = new Image();
                 let detectedMimeType = 'image/jpeg';
+
                 img.onload = () => {
                     const canvas = document.createElement('canvas');
                     const ctx = canvas.getContext('2d');
-                    let width = img.width; let height = img.height;
-                    if (width > maxWidth || height > maxHeight) { const ratio = Math.min(maxWidth / width, maxHeight / height); width *= ratio; height *= ratio; }
-                    canvas.width = width; canvas.height = height; ctx.drawImage(img, 0, 0, width, height);
+
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > maxWidth || height > maxHeight) {
+                        const ratio = Math.min(maxWidth / width, maxHeight / height);
+                        width *= ratio;
+                        height *= ratio;
+                    }
+                    
+                    canvas.width = width;
+                    canvas.height = height;
+                    ctx.drawImage(img, 0, 0, width, height);
+                    
                     let compressedDataUrl;
-                    if (detectedMimeType === 'image/png' || detectedMimeType === 'image/webp') { compressedDataUrl = canvas.toDataURL('image/png'); } else { compressedDataUrl = canvas.toDataURL('image/jpeg', quality); }
+                    if (detectedMimeType === 'image/png' || detectedMimeType === 'image/webp') {
+                        compressedDataUrl = canvas.toDataURL('image/png');
+                    } else {
+                        compressedDataUrl = canvas.toDataURL('image/jpeg', quality);
+                    }
                     resolve(compressedDataUrl);
                 };
-                img.onerror = (e) => { console.error('Error loading image:', e); resolve(''); };
+                img.onerror = (e) => {
+                    console.error('Error loading image:', e);
+                    resolve(''); 
+                };
+
                 if (source instanceof File) {
-                    detectedMimeType = source.type; const reader = new FileReader();
-                    reader.onload = (e) => { img.src = e.target.result; }; reader.readAsDataURL(source);
+                    detectedMimeType = source.type;
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        img.src = e.target.result;
+                    };
+                    reader.readAsDataURL(source);
                 } else if (typeof source === 'string') {
                     if (source.startsWith('data:')) {
                         const mimeMatch = source.match(/^data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+);base64,/);
-                        if (mimeMatch && mimeMatch[1]) { detectedMimeType = mimeMatch[1]; }
+                        if (mimeMatch && mimeMatch[1]) {
+                            detectedMimeType = mimeMatch[1];
+                        }
                         img.src = source;
                     } else {
                         try {
-                            const response = await fetch(source, { mode: 'cors' }); if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                            const blob = await response.blob(); detectedMimeType = blob.type; const reader = new FileReader();
-                            reader.onload = (e) => { img.src = e.target.result; };
-                            reader.onerror = (e) => { console.error('Error reading blob as DataURL:', e); resolve(''); }; reader.readAsDataURL(blob);
-                        } catch (error) { img.src = source; }
+                            const response = await fetch(source, { mode: 'cors' });
+                            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                            const blob = await response.blob();
+                            detectedMimeType = blob.type;
+                            const reader = new FileReader();
+                            reader.onload = (e) => {
+                                img.src = e.target.result;
+                            };
+                            reader.onerror = (e) => {
+                                console.error('Error reading blob as DataURL:', e);
+                                resolve('');
+                            };
+                            reader.readAsDataURL(blob);
+                        } catch (error) {
+                            console.warn(`Could not fetch image from URL directly (might be CORS issue), falling back to direct src set. Transparency might not be preserved if original was PNG and was not a data URL: ${source}`, error);
+                            img.src = source; 
+                        }
                     }
-                } else { resolve(''); }
+                } else {
+                    console.error('Invalid source type for loadImageAndCompress');
+                    resolve('');
+                }
             });
         },
-        hexToRgba(hex, alpha) {
-            let r = 0, g = 0, b = 0;
-            if (hex.length == 4) { r = "0x" + hex[1] + hex[1]; g = "0x" + hex[2] + hex[2]; b = "0x" + hex[3] + hex[3]; } 
-            else if (hex.length == 7) { r = "0x" + hex[1] + hex[2]; g = "0x" + hex[3] + hex[4]; b = "0x" + hex[5] + hex[6]; }
-            return `rgba(${+r},${+g},${+b},${alpha})`;
-        },
 
-        async handleImage(file,target){if(file){const c=await this.loadImageAndCompress(file,0.7,512,512);this.data[target].src=c;this.updatePreview();}},
-        async handleImageURL(url,target){if(url){const c=await this.loadImageAndCompress(url,0.7,512,512);this.data[target].src=c;this.updatePreview();}},
-        async handleLocations(files){for(let f of files){const c=await this.loadImageAndCompress(f,0.75,1280,1280);this.locations.push({name:f.name,data:c});}this.renderLocationList();},
-        async addLocationURL(url){if(url){const c=await this.loadImageAndCompress(url,0.75,1280,1280);const n=url.substring(url.lastIndexOf('/')+1)||'URL Image';this.locations.push({name:n,data:c});this.renderLocationList();document.getElementById('i_loc_url').value='';}},
+        async handleImage(file,target){
+            if(file){
+                const compressedData = await this.loadImageAndCompress(file, 0.7, 512, 512);
+                this.data[target].src=compressedData;
+                this.updatePreview();
+            }
+        },
+        async handleImageURL(url, target){
+            if(url){
+                const compressedData = await this.loadImageAndCompress(url, 0.7, 512, 512);
+                this.data[target].src = compressedData;
+                this.updatePreview();
+            }
+        },
+        async handleLocations(files){
+            for(let file of files){
+                const compressedData = await this.loadImageAndCompress(file, 0.75, 1280, 1280);
+                this.locations.push({name:file.name,data:compressedData});
+            }
+            this.renderLocationList();
+        },
+        async addLocationURL(url){
+            if(url){
+                const compressedData = await this.loadImageAndCompress(url, 0.75, 1280, 1280);
+                const name = url.substring(url.lastIndexOf('/') + 1) || 'URL Image';
+                this.locations.push({name: name, data: compressedData});
+                this.renderLocationList();
+                document.getElementById('i_loc_url').value = '';
+            }
+        },
         renderLocationList(){const c=document.getElementById('location-list');c.innerHTML='';this.locations.forEach((loc,i)=>{const item=document.createElement('div');item.className='list-item';item.innerHTML=`<span>${i+1}. ${loc.name}</span><button class="fx-btn" style="color:var(--primary)" onclick="app.deleteLocation(${i})">X</button>`;c.appendChild(item);});c.style.display=this.locations.length>0?'flex':'none';this.updatePreview();},
         deleteLocation(i){this.locations.splice(i,1);this.renderLocationList();},
         handleMusic(file){if(file){const r=new FileReader();r.onload=e=>{this.musicFile={name:file.name,data:e.target.result};document.getElementById('music_name').textContent='Файл: '+file.name;};r.readAsDataURL(file);}},
         bindEvents(){
-            // Existing Events
             document.getElementById('f_hero').onchange=e=>this.handleImage(e.target.files[0],'hero');
             document.getElementById('f_boss').onchange=e=>this.handleImage(e.target.files[0],'boss');
             document.getElementById('f_loc').onchange=e=>this.handleLocations(e.target.files);
             document.getElementById('f_music').onchange=e=>this.handleMusic(e.target.files[0]);
+            
             document.getElementById('chk_title_screen').onchange=e=>{this.data.titleScreenOn=e.target.checked;this.updatePreview();};
+
             ['hero','boss'].forEach(t=>{document.getElementById('i_'+t.charAt(0)+'_name').oninput=()=>this.updatePreview();});
             const bindS=(id,target,key)=>document.getElementById(id).oninput=e=>{this.data[target][key]=e.target.value;this.updatePreview();};
             bindS('r_h_size','hero','size');bindS('r_b_size','boss','size');bindS('r_h_glow','hero','gP');bindS('r_b_glow','boss','gP');bindS('r_h_speed','hero','speed');bindS('r_b_speed','boss','speed');
-            document.getElementById('r_h_landing').oninput=e=>{this.data.hero.landingOffset=e.target.value;document.getElementById('val_h_landing').innerText=e.target.value+'%';this.updatePreview();};
-            document.getElementById('r_b_landing').oninput=e=>{this.data.boss.landingOffset=e.target.value;document.getElementById('val_b_landing').innerText=e.target.value+'%';this.updatePreview();};
-            document.getElementById('r_h_posx').oninput=e=>{this.data.hero.posX=e.target.value;document.getElementById('val_h_posx').innerText=e.target.value+'%';this.updatePreview();};
-            document.getElementById('r_b_posx').oninput=e=>{this.data.boss.posX=e.target.value;document.getElementById('val_b_posx').innerText=e.target.value+'%';this.updatePreview();};
+
+            document.getElementById('r_h_landing').oninput = e => {
+                this.data.hero.landingOffset = e.target.value;
+                document.getElementById('val_h_landing').innerText = e.target.value + '%';
+                this.updatePreview();
+            };
+            document.getElementById('r_b_landing').oninput = e => {
+                this.data.boss.landingOffset = e.target.value;
+                document.getElementById('val_b_landing').innerText = e.target.value + '%';
+                this.updatePreview();
+            };
+            document.getElementById('val_h_landing').innerText = this.data.hero.landingOffset + '%';
+            document.getElementById('val_b_landing').innerText = this.data.boss.landingOffset + '%';
+
+            /* НОВЫЕ СЛУШАТЕЛИ ДЛЯ ПОЗИЦИИ ПО X */
+            document.getElementById('r_h_posx').oninput = e => {
+                this.data.hero.posX = e.target.value;
+                document.getElementById('val_h_posx').innerText = e.target.value + '%';
+                this.updatePreview();
+            };
+            document.getElementById('r_b_posx').oninput = e => {
+                this.data.boss.posX = e.target.value;
+                document.getElementById('val_b_posx').innerText = e.target.value + '%';
+                this.updatePreview();
+            };
+            document.getElementById('val_h_posx').innerText = this.data.hero.posX + '%';
+            document.getElementById('val_b_posx').innerText = this.data.boss.posX + '%';
+
             document.getElementById('c_h_glow').oninput=e=>{this.data.hero.gC=e.target.value;this.updatePreview();};
             document.getElementById('c_b_glow').oninput=e=>{this.data.boss.gC=e.target.value;this.updatePreview();};
             document.getElementById('chk_timer').onchange=e=>{this.data.timerOn=e.target.checked;this.updatePreview();};
             document.getElementById('r_timer').oninput=e=>{this.data.timer=e.target.value;document.getElementById('val_timer').innerText=e.target.value;this.updatePreview();};
-            
-            // New UI Events
-            const bindUI=(id,key,isVal=true)=>document.getElementById(id).oninput=e=>{this.data.ui[key]=isVal?e.target.value:e.target.value/100;this.updatePreview();};
-            bindUI('c_bg_color','bgColor');
-            bindUI('r_bg_opacity','bgOpacity',false);
-            bindUI('c_dock_color','dockBg');
-            bindUI('r_dock_opacity','dockOpacity',false);
-            bindUI('c_btn_color','btnBg');
-            bindUI('c_btn_border_color','btnBorder');
-            bindUI('c_btn_glow_color','btnGlow');
-            bindUI('r_btn_glow','btnGlowP');
-            bindUI('c_bar_hero_color','barHero');
-            bindUI('c_bar_boss_color','barBoss');
-            bindUI('c_bar_frame_color','barFrame');
-            bindUI('r_bar_glow','barGlowP');
-            bindUI('s_font_family','fontFamily');
-            bindUI('r_font_size','fontSize');
+
+            const bindD = (id, key, isNum) => document.getElementById(id).oninput = e => { this.data.design[key] = isNum ? Number(e.target.value) : e.target.value; this.updatePreview(); };
+            bindD('c_bg_col', 'bgCol', false);
+            bindD('r_bg_op', 'bgOp', true);
+            bindD('c_btn_col', 'btnCol', false);
+            bindD('r_btn_glow', 'btnGlow', true);
+            bindD('c_btn_glow', 'btnGlowCol', false);
+            bindD('c_panel_col', 'panelCol', false);
+            bindD('r_panel_op', 'panelOp', true);
+            bindD('c_hp_hero', 'hpHero', false);
+            bindD('c_hp_boss', 'hpBoss', false);
+            bindD('c_hp_border', 'hpBorder', false);
+            bindD('r_hp_glow', 'hpGlow', true);
+            bindD('c_hp_glow', 'hpGlowCol', false);
+            bindD('s_font', 'fontFam', false);
+            bindD('r_font_size', 'fontSize', true);
         },
         renderQuestList(){
-            const list=document.getElementById('quest-list'); list.innerHTML='';
+            const list=document.getElementById('quest-list');
+            list.innerHTML='';
             this.quests.forEach((q,i)=>{
-                const item=document.createElement('div'); item.className='list-item';
+                const item=document.createElement('div');
+                item.className='list-item';
                 item.innerHTML=`<span>${i+1}. ${q.text||'Новый вопрос'}</span><div><button class="fx-btn" onclick="app.editQuest(${i})">✏️</button><button class="fx-btn" style="color:var(--primary)" onclick="app.deleteQuest(${i})">🗑️</button></div>`;
                 list.appendChild(item);
             });
             setTimeout(() => { if(window.MathJax) MathJax.typesetPromise([list]); }, 50);
             this.updatePreview();
         },
+        
         customConfirm(text, action) {
             const overlay = document.createElement('div');
             overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:9999;display:flex;align-items:center;justify-content:center;';
-            overlay.innerHTML = `<div style="background:#1a1829;border:2px solid var(--primary);padding:30px;border-radius:12px;text-align:center;box-shadow:0 0 40px rgba(138,43,226,0.4); font-family:'Montserrat', sans-serif;"><div style="color:#fff;font-size:18px;font-weight:bold;margin-bottom:25px;">${text}</div><div style="display:flex;gap:20px;justify-content:center;"><button class="modal-btn" id="btn-cancel">ОТМЕНА</button><button class="modal-btn" id="btn-confirm">УДАЛИТЬ</button></div></div>`;
+            overlay.innerHTML = `
+                <div style="background:#1a1829;border:2px solid var(--primary);padding:30px;border-radius:12px;text-align:center;box-shadow:0 0 40px rgba(138,43,226,0.4); font-family:'Montserrat', sans-serif;">
+                    <div style="color:#fff;font-size:18px;font-weight:bold;margin-bottom:25px;">${text}</div>
+                    <div style="display:flex;gap:20px;justify-content:center;">
+                        <button class="modal-btn" id="btn-cancel">ОТМЕНА</button>
+                        <button class="modal-btn" id="btn-confirm">УДАЛИТЬ</button>
+                    </div>
+                </div>`;
             document.body.appendChild(overlay);
+            
             document.getElementById('btn-cancel').onclick = () => overlay.remove();
-            document.getElementById('btn-confirm').onclick = () => { action(); overlay.remove(); };
+            document.getElementById('btn-confirm').onclick = () => { 
+                action(); 
+                overlay.remove(); 
+            };
         },
 
         addQuest(isFirst=false){const newQ={type:'choice',text:'Сколько будет $2 + 2$?',correct:'$4$',wrongs:['$5$','$22$'],correctInp:'4'};this.quests.push(newQ);if(!isFirst)this.renderQuestList();this.editQuest(this.quests.length-1);},
         editQuest(index){this.currentQuestIndex=index;const q=this.quests[index];document.getElementById('editor-title').innerText=`ЗАДАНИЕ #${index+1}`;this.setQType(q.type);document.getElementById('i_q_text').value=q.text;document.getElementById('i_c_ans').value=q.correct;document.getElementById('i_w1').value=q.wrongs[0];document.getElementById('i_w2').value=q.wrongs[1];document.getElementById('i_in_ans').value=q.correctInp;document.getElementById('quest-list-container').style.display='none';document.getElementById('quest-editor-panel').style.display='block';},
         saveQuest(){if(this.currentQuestIndex===-1)return;const q=this.quests[this.currentQuestIndex];q.type=document.querySelector('#quest-editor-panel .sub-tab-link.active').id==='b_choice'?'choice':'input';q.text=document.getElementById('i_q_text').value;if(q.type==='choice'){q.correct=document.getElementById('i_c_ans').value;q.wrongs=[document.getElementById('i_w1').value,document.getElementById('i_w2').value];}else{q.correctInp=document.getElementById('i_in_ans').value;}this.previewQuestIndex=this.currentQuestIndex;document.getElementById('quest-list-container').style.display='block';document.getElementById('quest-editor-panel').style.display='none';this.renderQuestList();},
-        deleteQuest(index){this.customConfirm(`Удалить задание #${index+1}?`,()=>{this.quests.splice(index,1);this.previewQuestIndex=0;this.renderQuestList();});},
+        
+        deleteQuest(index){
+            this.customConfirm(`Удалить задание #${index+1}?`, () => {
+                this.quests.splice(index,1);
+                this.previewQuestIndex=0;
+                this.renderQuestList();
+            });
+        },
 
         prevPreviewQuest(){if(this.previewQuestIndex>0){this.previewQuestIndex--;this.updatePreview();}},
         nextPreviewQuest(){if(this.previewQuestIndex<this.quests.length-1){this.previewQuestIndex++;this.updatePreview();}},
         updatePreview(){
-            const h=this.data.hero,b=this.data.boss,ui=this.data.ui;
-            const stage = document.getElementById('stage_bg');
-            stage.style.backgroundImage=this.locations.length>0?`url(${this.locations[0].data})`:'none';
-            stage.style.backgroundColor = ui.bgColor;
-            stage.style.setProperty('--bg-overlay-opacity', this.locations.length > 0 ? ui.bgOpacity : 0);
+            const h=this.data.hero;
+            const b=this.data.boss;
+            const dsg = this.data.design;
             
-            document.getElementById('quest_dock_preview').style.backgroundColor = this.hexToRgba(ui.dockBg, ui.dockOpacity);
+            const hex2rgb = h => { let c=h.substring(1).split(''); if(c.length===3)c=[c[0],c[0],c[1],c[1],c[2],c[2]]; c='0x'+c.join(''); return [(c>>16)&255,(c>>8)&255,c&255].join(','); };
+            const bgRgb = hex2rgb(dsg.bgCol);
+            const panelRgb = hex2rgb(dsg.panelCol);
+
+            document.getElementById('stage_bg').style.backgroundColor = dsg.bgCol;
+            document.getElementById('stage_bg').style.backgroundImage = this.locations.length > 0 ? `linear-gradient(rgba(${bgRgb}, ${dsg.bgOp / 100}), rgba(${bgRgb}, ${dsg.bgOp / 100})), url(${this.locations[0].data})` : `none`;
+            
+            let styleTag = document.getElementById('dynamic-design-styles');
+            if (!styleTag) {
+                styleTag = document.createElement('style');
+                styleTag.id = 'dynamic-design-styles';
+                document.head.appendChild(styleTag);
+            }
+            styleTag.innerHTML = `
+                .quest-dock { background: rgba(${panelRgb}, ${dsg.panelOp / 100}) !important; font-family: ${dsg.fontFam} !important; }
+                .q-preview-text { font-size: ${dsg.fontSize}px !important; }
+                .q-dummy-btn { background: ${dsg.btnCol} !important; font-family: ${dsg.fontFam} !important; box-shadow: ${dsg.btnGlow > 0 ? `0 0 ${dsg.btnGlow}px ${dsg.btnGlowCol}` : 'none'} !important; border-color: ${dsg.btnCol} !important; }
+                .q-dummy-btn.correct { background: var(--green) !important; box-shadow: 0 0 10px var(--green) !important; border-color: var(--green) !important; color: #000 !important; }
+                .q-dummy-btn.wrong { background: var(--red) !important; box-shadow: 0 0 10px var(--red) !important; border-color: var(--red) !important; }
+                #hp_h_preview { background: ${dsg.hpHero} !important; }
+                #hp_b_preview { background: ${dsg.hpBoss} !important; }
+                .hp-bar-preview { border-color: ${dsg.hpBorder} !important; box-shadow: ${dsg.hpGlow > 0 ? `0 0 ${dsg.hpGlow}px ${dsg.hpGlowCol}` : 'none'} !important; }
+                #preview_input_ans { font-family: ${dsg.fontFam} !important; }
+            `;
+
             document.getElementById('p_h_name').innerText=document.getElementById('i_h_name').value;
             document.getElementById('p_b_name').innerText=document.getElementById('i_b_name').value;
             document.getElementById('p_timer').style.display=this.data.timerOn?'block':'none';
             document.getElementById('p_timer').innerText=this.data.timerOn?(this.data.timer<10?'0'+this.data.timer:this.data.timer)+':00':'';
             
-            // Progress bars
-            const hBar = document.getElementById('hp_h_preview'), bBar = document.getElementById('hp_b_preview');
-            hBar.style.backgroundColor = ui.barHero; bBar.style.backgroundColor = ui.barBoss;
-            hBar.parentElement.style.borderColor = ui.barFrame; bBar.parentElement.style.borderColor = ui.barFrame;
-            if (ui.barGlowP > 0) {
-                hBar.parentElement.style.boxShadow = `0 0 ${ui.barGlowP}px ${ui.barHero}`;
-                bBar.parentElement.style.boxShadow = `0 0 ${ui.barGlowP}px ${ui.barBoss}`;
-            } else {
-                hBar.parentElement.style.boxShadow = 'none'; bBar.parentElement.style.boxShadow = 'none';
-            }
-
             const currentQ=this.quests[this.previewQuestIndex]||{text:'Настройте задания...'};
-            const qTextEl = document.getElementById('prev_q_text');
-            qTextEl.innerText=(this.quests.length>0?`(${this.previewQuestIndex+1}/${this.quests.length}) `:'')+currentQ.text;
-            qTextEl.style.fontFamily = ui.fontFamily;
-            qTextEl.style.fontSize = ui.fontSize + 'px';
-
+            document.getElementById('prev_q_text').innerText=(this.quests.length>0?`(${this.previewQuestIndex+1}/${this.quests.length}) `:'')+currentQ.text;
             const btnsDiv=document.getElementById('prev_q_btns');
             btnsDiv.innerHTML='';
-            document.getElementById('prev_q_btn').disabled=this.previewQuestIndex===0;
-            document.getElementById('next_q_btn').disabled=this.previewQuestIndex>=this.quests.length-1||this.quests.length===0;
+            const prevBtn=document.getElementById('prev_q_btn');
+            prevBtn.disabled=this.previewQuestIndex===0;
+            const nextBtn=document.getElementById('next_q_btn');
+            nextBtn.disabled=this.previewQuestIndex>=this.quests.length-1||this.quests.length===0;
 
             if(this.quests.length>0){
                 if(currentQ.type==='choice'){
@@ -396,51 +524,63 @@
                     if(currentQ.wrongs[0])answers.push({t:currentQ.wrongs[0],c:false});
                     if(currentQ.wrongs[1])answers.push({t:currentQ.wrongs[1],c:false});
                     answers.sort(()=>Math.random()-0.5);
-                    answers.forEach(a => {
-                        const btn = document.createElement('div');
-                        btn.className = 'q-dummy-btn';
-                        btn.innerHTML = a.t;
-                        btn.onclick = () => this.previewAnswer(btn, a.c);
-                        btn.style.backgroundColor = ui.btnBg;
-                        btn.style.borderColor = ui.btnBorder;
-                        btn.style.boxShadow = ui.btnGlowP > 0 ? `0 0 ${ui.btnGlowP}px ${ui.btnGlow}` : 'none';
-                        btn.style.fontFamily = ui.fontFamily;
-                        btn.style.fontSize = Math.max(12, ui.fontSize - 4) + 'px'; // make button text smaller
-                        btnsDiv.appendChild(btn);
-                    });
+                    let btnsHTML=answers.map(a=>`<div class="q-dummy-btn" onclick="app.previewAnswer(this,${a.c})">${a.t}</div>`).join('');
+                    btnsDiv.innerHTML=btnsHTML;
                 }else{
                     btnsDiv.innerHTML=`<input id="preview_input_ans" type="text" class="fx-input" style="width:150px; text-align:center;" placeholder="Ваш ответ..."><div class="q-dummy-btn" onclick="app.previewInputAnswer()">OK</div>`;
                 }
             }
             
-            setTimeout(() => { if (window.MathJax) { MathJax.typesetPromise([qTextEl, btnsDiv]); } }, 50);
+            setTimeout(() => {
+                if (window.MathJax) {
+                    MathJax.typesetPromise([document.getElementById('prev_q_text'), document.getElementById('prev_q_btns')]);
+                }
+            }, 50);
 
+            /* ОБНОВЛЯЕМ ПОЗИЦИЮ ГЕРОЕВ В ПРЕДПРОСМОТРЕ */
             document.getElementById('prev_hero_box').style.left = h.posX + '%';
             document.getElementById('prev_boss_box').style.right = b.posX + '%';
 
             const apply=(elId,d)=>{
-                const img=document.getElementById(elId); const charBox = img.parentNode;
-                img.src=d.src; charBox.style.bottom = d.landingOffset + '%'; 
-                img.style.width = d.size + '%'; img.style.height = 'auto';
+                const img=document.getElementById(elId);
+                const charBox = img.parentNode;
+                img.src=d.src;
+                charBox.style.bottom = d.landingOffset + '%'; 
+                img.style.width = d.size + '%';
+                img.style.height = 'auto';
                 img.style.filter=d.gP>0?`drop-shadow(0 0 ${d.gP}px ${d.gC})`:'none';
-                let dur=(11-d.speed)*0.5; if(['shake','wobble'].includes(d.anim))dur*=.5;
-                let timing='ease-in-out'; if(['glitch'].includes(d.anim))timing=`steps(${Math.round(dur*10)})`;
+                let dur=(11-d.speed)*0.5;
+                if(['shake','wobble'].includes(d.anim))dur*=.5;
+                let timing='ease-in-out';
+                if(['glitch'].includes(d.anim))timing=`steps(${Math.round(dur*10)})`;
                 if(['shake','spin','flip'].includes(d.anim))timing='linear';
                 img.style.animation=d.anim!=='none'?`fx-${d.anim} ${dur}s infinite ${timing}`:'none';
                 img.style.transformOrigin=d.anim==='swing'?'top center':'center';
             };
-            apply('img_hero',h); apply('img_boss',b);
+            apply('img_hero',h);
+            apply('img_boss',b);
         },
         previewAnswer(btn,isCorrect){btn.classList.add(isCorrect?'correct':'wrong');setTimeout(()=>btn.classList.remove('correct','wrong'),500);},
         previewInputAnswer(){const input=document.getElementById('preview_input_ans');const q=this.quests[this.previewQuestIndex];if(!input||!q)return;const isCorrect=input.value.trim().toLowerCase()===q.correctInp.trim().toLowerCase();input.classList.add(isCorrect?'correct':'wrong');setTimeout(()=>input.classList.remove('correct','wrong'),800);},
         generate(){
-            const d=this.data, ui=this.data.ui;
-            const langData={ru:{title:document.getElementById('i_title_ru').value,win:document.getElementById('i_win_msg_ru').value,lose:document.getElementById('i_lose_msg_ru').value,play:document.getElementById('i_play_btn_ru').value},en:{title:document.getElementById('i_title_en').value,win:document.getElementById('i_win_msg_en').value,lose:document.getElementById('i_lose_msg_en').value,play:document.getElementById('i_play_btn_en').value}};
+            const d=this.data;
+            const langData={
+                ru:{title:document.getElementById('i_title_ru').value,win:document.getElementById('i_win_msg_ru').value,lose:document.getElementById('i_lose_msg_ru').value,play:document.getElementById('i_play_btn_ru').value},
+                en:{title:document.getElementById('i_title_en').value,win:document.getElementById('i_win_msg_en').value,lose:document.getElementById('i_lose_msg_en').value,play:document.getElementById('i_play_btn_en').value}
+            };
             const qData={hName:document.getElementById('i_h_name').value,bName:document.getElementById('i_b_name').value};
+            
+            const hex2rgb = h => { let c=h.substring(1).split(''); if(c.length===3)c=[c[0],c[0],c[1],c[1],c[2],c[2]]; c='0x'+c.join(''); return [(c>>16)&255,(c>>8)&255,c&255].join(','); };
+            const bgRgb = hex2rgb(d.design.bgCol);
+            const panelRgb = hex2rgb(d.design.panelCol);
+
             const getAnimRule=o=>{if(o.anim==='none')return'';let dur=(11-o.speed)*0.5;if(['shake','wobble'].includes(o.anim))dur*=.5;let timing='ease-in-out';if(['glitch'].includes(o.anim))timing=`steps(${Math.round(dur*10)})`;if(['shake','spin','flip'].includes(o.anim))timing='linear';return`animation:fx-${o.anim} ${dur}s infinite ${timing};transform-origin:${o.anim==='swing'?'top center':'center'};`;};
+            
             const hImgStyle=`width:${d.hero.size}%; height:auto; filter:${d.hero.gP>0?`drop-shadow(0 0 ${d.hero.gP}px ${d.hero.gC})`:''};${getAnimRule(d.hero)}`;
             const bImgStyle=`width:${d.boss.size}%; height:auto; filter:${d.boss.gP>0?`drop-shadow(0 0 ${d.boss.gP}px ${d.boss.gC})`:''};${getAnimRule(d.boss)}`;
+
             const generatedOverlay = d.titleScreenOn ? `<div class="overlay" id="start-overlay"><div class="big-title">${langData[this.gameLang].title.replace(/\|/g, '<br>')}</div><button class="play-btn" onclick="startGame()"> ${langData[this.gameLang].play}</button></div>` : '';
+
             const script=`<script>
 let timerVal=${d.timer*60},timerOn=${d.timerOn},audioCtx=null,currentQIndex=-1,locIndex=0,isAnswered=false,battleState=50,isGameOver=false,gameStarted=false;
 const quests=${JSON.stringify(this.quests)},locations=${JSON.stringify(this.locations.map(l=>l.data))},langPack=${JSON.stringify(langData[this.gameLang])};
@@ -456,9 +596,11 @@ function startTimer(){const e=document.getElementById('timer-disp');const i=setI
 timerVal--;let m=Math.floor(timerVal/60);let s=timerVal%60;e.innerText=(m<10?'0'+m:m)+':'+(s<10?'0'+s:s);if(timerVal<=0){clearInterval(i);endGame(battleState>50);}},1000);}
 function updatePositionsAndProgress(){const heroWrap=document.getElementById('hero-wrap');const bossWrap=document.getElementById('boss-wrap');const barH=document.getElementById('bar-h');const barB=document.getElementById('bar-b');const heroAdvantage=battleState-50;const heroMove=Math.max(0,heroAdvantage)*2;const bossMove=Math.max(0,-heroAdvantage)*2;heroWrap.style.transform=\`translateX(\${heroMove}%)\`;bossWrap.style.transform=\`translateX(-\${bossMove}%)\`;barH.style.width=\`\${battleState}%\`;barB.style.width=\`\${100-battleState}%\`;if(battleState>=100)endGame(true);else if(battleState<=0)endGame(false);}
 function loadNextQuestion(){isAnswered=false;currentQIndex++;const isGameEnd=currentQIndex>=quests.length;if(isGameEnd){endGame(battleState>50);return;}
-if(locations.length>0&&currentQIndex>0){locIndex=(locIndex+1)%locations.length;document.body.style.backgroundImage=\`url(\${locations[locIndex]})\`;}
+if(locations.length>0&&currentQIndex>0){locIndex=(locIndex+1)%locations.length;document.body.style.backgroundImage=\`linear-gradient(rgba(${bgRgb}, ${d.design.bgOp/100}), rgba(${bgRgb}, ${d.design.bgOp/100})), url(\${locations[locIndex]})\`;}
 const q=quests[currentQIndex];document.getElementById('q-text').innerText=q.text;const p=document.getElementById('q-inputs');let html='';if(q.type==='choice'){const ans=[{t:q.correct,c:true}];q.wrongs.forEach(w=>{if(w)ans.push({t:w,c:false});});ans.sort(()=>Math.random()-0.5);html=\`<div class="btns">\${ans.map(a=>\`<button data-correct="\${a.c}" class="game-btn" onclick="checkChoice(this,\${a.c})">\${a.t}</button>\`).join('')}</div>\`;}else{html=\`<div class="inp-area"><div class="inp-row"><input type="text" id="inp-ans" placeholder="..." autocomplete="off"><button class="game-btn" onclick="checkInput()">OK</button></div></div>\`;}
-p.innerHTML=html; if(window.MathJax) { MathJax.typesetPromise([document.getElementById('q-panel')]); }}
+p.innerHTML=html; 
+if(window.MathJax) { MathJax.typesetPromise([document.getElementById('q-panel')]); } 
+}
 function showScore(targetId,text,color){const scorePopup=document.getElementById(targetId.replace('-wrap','-score-popup'));const targetEl=document.getElementById(targetId);const targetRect=targetEl.getBoundingClientRect();scorePopup.innerText=text;scorePopup.style.color=color;scorePopup.style.textShadow=\`0 0 10px \${color}\`;scorePopup.style.left=targetRect.left+targetRect.width/2+'px';scorePopup.style.top=targetRect.top-20+'px';scorePopup.classList.add('show');setTimeout(()=>{scorePopup.classList.remove('show');},1000);}
 function animateAttack(attackerId,targetId,color,scoreText){const projectile=document.getElementById('projectile');const attacker=document.getElementById(attackerId);const target=document.getElementById(targetId);const targetImg=document.getElementById(targetId.replace('-wrap','-img'));const battleGround=document.querySelector('.battle-ground');const startCharRect=attacker.getBoundingClientRect();const targetCharRect=target.getBoundingClientRect();const battleGroundRect=battleGround.getBoundingClientRect();const startX=(startCharRect.left+startCharRect.width/2)-battleGroundRect.left;const startY=(startCharRect.top+startCharRect.height/2)-battleGroundRect.top;const endX=(targetCharRect.left+targetCharRect.width/2)-battleGroundRect.left;const endY=(targetCharRect.top+targetCharRect.height/2)-battleGroundRect.top;projectile.style.background=color;projectile.style.boxShadow=\`0 0 15px \${color}, 0 0 25px \${color}\`;projectile.style.left=startX+'px';projectile.style.top=startY+'px';projectile.style.opacity='1';projectile.style.transform='scale(1)';setTimeout(()=>{projectile.style.left=endX+'px';projectile.style.top=endY+'px';},10);setTimeout(()=>{beep('hit');projectile.style.transform='scale(3)';projectile.style.opacity='0';targetImg.style.animation='fx-shake 0.4s';targetImg.style.filter=\`drop-shadow(0 0 25px \${color})\`;showScore(attackerId,scoreText,'var(--green)');setTimeout(()=>{targetImg.style.animation='';targetImg.style.filter='';},400);},550);}
 function checkChoice(b,isCor){if(!gameStarted)activateGame();if(isAnswered)return;isAnswered=true;document.querySelectorAll('.btns .game-btn').forEach(btn=>btn.disabled=true);if(isCor){handleCorrect(b);}else{handleWrong(b);const correctBtn=document.querySelector('.game-btn[data-correct=\\"true\\"]');if(correctBtn)correctBtn.style.background='var(--green)';}}
@@ -477,13 +619,20 @@ document.addEventListener('DOMContentLoaded',initGame);
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rajdhani:wght@700&family=Montserrat:wght@900&display=swap');
 :root{ --primary: #8A2BE2; --red: #ff3b30; --green: #00FF88; --magenta: #e521e5;}
-body{margin:0;overflow:hidden;font-family:${ui.fontFamily};user-select:none;width:100%;height:100vh;background-color:${ui.bgColor};background-size:cover;background-position:center;transition:background-image 0.5s ease-in-out; background-image:${this.locations.length>0?`url(${this.locations[0].data})`:'none'}; display: flex; align-items: center; justify-content: center; position: relative;}
-body::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0, ${this.locations.length > 0 ? ui.bgOpacity : 0}); z-index: 1; pointer-events: none; }
-* { box-sizing: border-box; z-index: 2; }
+body{margin:0;overflow:hidden;font-family:'Rajdhani',sans-serif;user-select:none;width:100%;height:100vh;background-color:${d.design.bgCol};background-size:cover;background-position:center;transition:background-image 0.5s ease-in-out; background-image:${this.locations.length>0?`linear-gradient(rgba(${bgRgb}, ${d.design.bgOp/100}), rgba(${bgRgb}, ${d.design.bgOp/100})), url(${this.locations[0].data})`:'none'}; display: flex; align-items: center; justify-content: center;}
+* { box-sizing: border-box; }
 @keyframes float-up-fade { 0% { transform: translateY(0) scale(0.8); opacity: 1; } 100% { transform: translateY(-60px) scale(1.2); opacity: 0; } }
 @keyframes fx-idle{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}@keyframes fx-float{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-15px) rotate(2deg)}}@keyframes fx-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}@keyframes fx-shake{0%{transform:translate(1px, 1px)}20%{transform:translate(-3px, 0px)}40%{transform:translate(1px, -1px)}60%{transform:translate(-3px, 1px)}80%{transform:translate(-1px, -1px)}100%{transform:translate(1px, -2px)}}@keyframes fx-glitch{0%{transform:translate(0)}20%{transform:translate(-2px, 2px)}40%{transform:translate(-2px, -2px)}60%{transform:translate(2px, 2px)}80%{transform:translate(2px, -2px)}100%{transform:translate(0)}}@keyframes fx-spin{0%{transform:rotateY(0deg)}100%{transform:rotateY(360deg)}}@keyframes fx-neon{0%,100%{opacity:1;filter:brightness(1)}50%{opacity:0.8;filter:brightness(1.5)}}@keyframes fx-wobble{0%,100%{transform:rotate(0deg)}25%{transform:rotate(-5deg)}75%{transform:rotate(5deg)}}@keyframes fx-swing{0%{transform:rotate(0deg)}20%{transform:rotate(15deg)}40%{transform:rotate(-10deg)}60%{transform:rotate(5deg)}80%{transform:rotate(-5deg)}100%{transform:rotate(0deg)}}@keyframes fx-bounce{0%,20%,50%,80%,100%{transform:translateY(0)}40%{transform:translateY(-30px)}60%{transform:translateY(-15px)}}@keyframes fx-flip{0%{transform:rotateY(0deg)}100%{transform:rotateY(360deg)}}@keyframes fx-ghost{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(1.05)}}
-.scene{ display:flex;flex-direction:column;justify-content:space-between; position:relative;opacity:${!d.titleScreenOn ? '1' : '0'};transition:opacity 0.5s; width: 100%; height: 100%; max-width: calc(100vh * 16 / 9); max-height: calc(100vw * 9 / 16); aspect-ratio: 16 / 9;}
-.overlay{position:fixed;inset:0;background:${ui.bgColor};z-index:99;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.scene{
+    display:flex;flex-direction:column;justify-content:space-between;
+    position:relative;opacity:${!d.titleScreenOn ? '1' : '0'};transition:opacity 0.5s;
+    width: 100%;
+    height: 100%;
+    max-width: calc(100vh * 16 / 9);
+    max-height: calc(100vw * 9 / 16);
+    aspect-ratio: 16 / 9;
+}
+.overlay{position:fixed;inset:0;background:#12101E;z-index:99;display:flex;flex-direction:column;align-items:center;justify-content:center;}
 .big-title{font-family:'Press Start 2P',cursive;font-size:clamp(24px,5vw,40px);color:#00e5ff;text-align:center;margin-bottom:40px;text-shadow:4px 4px 0 var(--primary);line-height:1.5;}
 .play-btn{background:transparent;color:#fff;padding:15px 50px;border:2px solid #fff;border-radius:50px;font-size:24px;font-weight:900;cursor:pointer;transition:0.3s;animation:fx-pulse 2s infinite;}
 .play-btn:hover{background:#00e5ff;color:#000;border-color:#00e5ff;box-shadow:0 0 30px #00e5ff;}
@@ -491,8 +640,7 @@ body::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0
 .ui-element { background:rgba(35,31,52,0.8); border-radius: 20px; box-shadow: 0 0 10px var(--primary), inset 0 0 8px rgba(0,0,0,0.5); padding: 8px;}
 .player-info { display:flex; align-items: center; gap: 10px; flex: 1; max-width: 350px;}
 .char-name{color:#fff;font-weight:700;font-size:18px;text-shadow:1px 1px 0 #000;white-space:nowrap; }
-.hp-bar{width:100%;height:14px;background:rgba(0,0,0,0.7);border-radius:7px;border:1px solid ${ui.barFrame};overflow:hidden; box-shadow: ${ui.barGlowP > 0 ? `0 0 ${ui.barGlowP}px ${ui.barHero}` : 'none'};}
-.player-info:last-child .hp-bar {box-shadow: ${ui.barGlowP > 0 ? `0 0 ${ui.barGlowP}px ${ui.barBoss}` : 'none'};}
+.hp-bar{width:100%;height:14px;background:rgba(0,0,0,0.7);border-radius:7px;border:1px solid ${d.design.hpBorder};box-shadow:${d.design.hpGlow > 0 ? `0 0 ${d.design.hpGlow}px ${d.design.hpGlowCol}` : 'none'};overflow:hidden;}
 .hp-fill{height:100%;transition:width 0.5s ease-out, background-color 0.5s; border-radius: 7px;}
 .timer-wrap { display: flex; flex-direction: column; align-items: center; gap: 8px;}
 .timer{ flex-shrink:0; font-family:'Rajdhani',sans-serif;font-weight:700;font-size:24px;color:#fff; letter-spacing: 2px; text-shadow: 0 0 8px #fff; width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; padding-top: 5px; background:rgba(35,31,52,0.8); border: 2px solid var(--primary); box-shadow: 0 0 10px var(--primary); }
@@ -500,21 +648,25 @@ body::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0
 .media-btn { background: rgba(35,31,52,0.8); color: #fff; border: 1px solid var(--primary); border-radius: 50%; width: 32px; height: 32px; font-size: 16px; cursor: pointer; display:flex; align-items: center; justify-content: center;}
 .stage-area{flex:1;position:relative;overflow:hidden;}
 .battle-ground { position: absolute; inset: 0 5%; bottom: 0; padding-bottom: 22%; }
-.char-wrap{width:35%; height:auto; display:flex; align-items:flex-end; justify-content:center; position:absolute; transition:transform 1s ease-in-out, opacity 0.5s;}
-.hero-wrap{left:${d.hero.posX}%;} .boss-wrap{right:${d.boss.posX}%;}
+.char-wrap{
+    width:35%; height:auto; display:flex; align-items:flex-end; justify-content:center; 
+    position:absolute; transition:transform 1s ease-in-out, opacity 0.5s;
+}
+.hero-wrap{left:${d.hero.posX}%;}
+.boss-wrap{right:${d.boss.posX}%;}
 .char{max-width:100%;max-height:100%;object-fit:contain;transition:filter 0.5s, opacity 0.5s;}
 #projectile { position: absolute; width: 30px; height: 30px; border-radius: 50%; opacity: 0; z-index: 100; transition: left 0.5s linear, top 0.5s linear, transform 0.2s, opacity 0.2s; pointer-events: none; transform-origin: center; margin-left: -15px; margin-top: -15px; }
 .score-popup{position:fixed;z-index:101;opacity:0;font-family:'Press Start 2P',cursive;font-size:20px;transform:translateX(-50%);pointer-events:none;}
 .score-popup.show{animation:float-up-fade 1s ease-out forwards;}
-.ui-panel{position:absolute; bottom:0; left:0; right:0; background:${this.hexToRgba(ui.dockBg, ui.dockOpacity)};padding:20px;border-top:4px solid #00e5ff;display:flex;flex-direction:column;align-items:center;gap:15px;min-height:20%;box-shadow:0 -10px 50px rgba(0,0,0,0.5);z-index:20;}
-.q-text{color:#fff;font-size:${ui.fontSize}px;font-weight:700;text-align:center;}
+.ui-panel{position:absolute; bottom:0; left:0; right:0; background:rgba(${panelRgb},${d.design.panelOp/100});padding:20px;border-top:4px solid #00e5ff;display:flex;flex-direction:column;align-items:center;gap:15px;min-height:20%;box-shadow:0 -10px 50px rgba(0,0,0,0.5);z-index:20;}
+.q-text{color:#fff;font-size:${d.design.fontSize}px;font-weight:700;text-align:center;font-family:${d.design.fontFam};}
 .btns{display:flex;gap:15px;flex-wrap:wrap;justify-content:center;width:100%;}
-.game-btn{background:${ui.btnBg};border:2px solid ${ui.btnBorder};color:#fff;padding:15px 30px;font-family:inherit;font-weight:700;font-size:${Math.max(12, ui.fontSize-4)}px;cursor:pointer;text-transform:uppercase;border-radius:8px;transition:0.1s;min-width:150px; box-shadow: ${ui.btnGlowP > 0 ? `0 0 ${ui.btnGlowP}px ${ui.btnGlow}` : 'none'};}
+.game-btn{background:${d.design.btnCol};border:2px solid ${d.design.btnCol};box-shadow:${d.design.btnGlow > 0 ? `0 0 ${d.design.btnGlow}px ${d.design.btnGlowCol}` : 'none'};color:#fff;padding:15px 30px;font-family:${d.design.fontFam};font-weight:700;font-size:18px;cursor:pointer;text-transform:uppercase;border-radius:8px;transition:0.1s;min-width:150px;}
 .game-btn:hover{background:#555;border-color:#fff;transform:translateY(-2px);}
 .game-btn:disabled { opacity: 0.7; cursor: not-allowed; }
 .inp-area{display:flex;flex-direction:column;align-items:center;gap:10px;}
 .inp-row{display:flex;gap:10px;}
-input[type=text]{padding:15px;border-radius:6px;border:2px solid #fff;font-family:inherit;font-weight:700;background:#000;color:#fff;font-size:${Math.max(12, ui.fontSize-4)}px;outline:none; transition: 0.3s;}
+input[type=text]{padding:15px;border-radius:6px;border:2px solid #fff;font-family:${d.design.fontFam};font-weight:700;background:#000;color:#fff;font-size:18px;outline:none; transition: 0.3s;}
 .correct-answer-hint { color: var(--green); margin-top: 5px; font-size: 16px; font-weight: 700; }
 </style></head><body>
 ${this.musicFile?`<audio id="bg-music" src="${this.musicFile.data}" loop></audio>`:''}
@@ -522,16 +674,20 @@ ${this.musicFile?`<audio id="bg-music" src="${this.musicFile.data}" loop></audio
 ${generatedOverlay}
 <div class="scene" id="game-root">
 <div class="hud">
-    <div class="player-info ui-element"><span class="char-name">${qData.hName}</span><div class="hp-bar"><div id="bar-h" class="hp-fill" style="background:${ui.barHero};width:50%;"></div></div></div>
+    <div class="player-info ui-element"><span class="char-name">${qData.hName}</span><div class="hp-bar"><div id="bar-h" class="hp-fill" style="background:${d.design.hpHero};width:50%;"></div></div></div>
     <div class="timer-wrap" id="timer-wrap" style="display:${(d.timerOn || this.musicFile)?'flex':'none'}">
         ${d.timerOn ? `<div class="timer" id="timer-disp">${(d.timer<10?'0'+d.timer:d.timer)+':00'}</div>` : ''}
         ${this.musicFile?`<div class="media-controls"><button id="mute-btn" class="media-btn">🔊</button><button id="pause-btn" class="media-btn">⏸️</button></div>`:''}
     </div>
-    <div class="player-info ui-element"><span class="char-name">${qData.bName}</span><div class="hp-bar"><div id="bar-b" class="hp-fill" style="background:${ui.barBoss};width:50%;"></div></div></div>
+    <div class="player-info ui-element"><span class="char-name">${qData.bName}</span><div class="hp-bar"><div id="bar-b" class="hp-fill" style="background:${d.design.hpBoss};width:50%;"></div></div></div>
 </div>
 <div class="stage-area"><div class="battle-ground"><div class="score-popup" id="hero-score-popup"></div><div class="score-popup" id="boss-score-popup"></div>
-    <div class="char-wrap hero-wrap" id="hero-wrap" style="bottom:${d.hero.landingOffset}%;"><img src="${d.hero.src}" class="char" id="hero-img" style="${hImgStyle}"></div>
-    <div class="char-wrap boss-wrap" id="boss-wrap" style="bottom:${d.boss.landingOffset}%;"><img src="${d.boss.src}" class="char" id="boss-img" style="${bImgStyle}"></div>
+    <div class="char-wrap hero-wrap" id="hero-wrap" style="bottom:${d.hero.landingOffset}%;">
+        <img src="${d.hero.src}" class="char" id="hero-img" style="${hImgStyle}">
+    </div>
+    <div class="char-wrap boss-wrap" id="boss-wrap" style="bottom:${d.boss.landingOffset}%;">
+        <img src="${d.boss.src}" class="char" id="boss-img" style="${bImgStyle}">
+    </div>
 </div></div>
 <div class="ui-panel" id="q-panel"><div class="q-text" id="q-text"></div><div id="q-inputs"></div></div>
 </div>${script}</body></html>`;
