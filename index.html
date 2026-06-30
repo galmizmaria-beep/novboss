@@ -179,6 +179,12 @@
                         
                         <div class="param-row"><span>Фон титульного экрана</span><input type="color" id="c_title_bg" value="#12101e" style="border:none;width:20px;height:20px;background:none;padding:0;"></div>
                         <div class="param-row"><span>Прозрачность титульного (%)</span><input type="range" id="r_title_op" min="0" max="100" value="95" style="width:50%"></div>
+                        <div class="param-row"><span>Цвет названия (Осн./Тень)</span>
+                            <div style="display:flex;gap:5px;">
+                                <input type="color" id="c_title_c1" value="#00e5ff" style="border:none;width:20px;height:20px;background:none;padding:0;">
+                                <input type="color" id="c_title_c2" value="#8a2be2" style="border:none;width:20px;height:20px;background:none;padding:0;">
+                            </div>
+                        </div>
                         <div class="param-row"><span>Цвет кнопки "Играть"</span><input type="color" id="c_play_btn" value="#00d2ff" style="border:none;width:20px;height:20px;background:none;padding:0;"></div>
                         <div class="param-row"><span>Прозрачность кн. "Играть"</span><input type="range" id="r_play_op" min="0" max="100" value="20" style="width:50%"></div>
                         <div class="param-row"><span>Свечение кн. "Играть"</span><input type="range" id="r_play_glow" min="0" max="50" value="10" style="width:40%"><input type="color" id="c_play_glow" value="#00e5ff" style="border:none;width:20px;height:20px;background:none;padding:0;"></div>
@@ -260,7 +266,7 @@
             timer:5,
             timerOn:true,
             titleScreenOn:true,
-            design: { bgCol: '#12101e', bgOp: 0, sepLine: '#00d2ff', timerBg: '#231f34', timerTxt: '#ffd700', plateBg: '#231f34', plateOp: 80, btnCol: '#333333', btnGlow: 0, btnGlowCol: '#00e5ff', panelCol: '#12101e', panelOp: 95, hpHero: '#00ff88', hpBoss: '#ff3b30', hpBorder: '#111111', hpGlow: 0, hpGlowCol: '#8a2be2', fontFam: "'Montserrat', sans-serif", qFontSize: 24, aFontSize: 18, titleBgCol: '#12101e', titleBgOp: 95, playBtnCol: '#00d2ff', playBtnOp: 20, playBtnGlow: 10, playBtnGlowCol: '#00e5ff' }
+            design: { bgCol: '#12101e', bgOp: 0, sepLine: '#00d2ff', timerBg: '#231f34', timerTxt: '#ffd700', plateBg: '#231f34', plateOp: 80, btnCol: '#333333', btnGlow: 0, btnGlowCol: '#00e5ff', panelCol: '#12101e', panelOp: 95, hpHero: '#00ff88', hpBoss: '#ff3b30', hpBorder: '#111111', hpGlow: 0, hpGlowCol: '#8a2be2', fontFam: "'Montserrat', sans-serif", qFontSize: 24, aFontSize: 18, titleBgCol: '#12101e', titleBgOp: 95, titleCol1: '#00e5ff', titleCol2: '#8a2be2', playBtnCol: '#00d2ff', playBtnOp: 20, playBtnGlow: 10, playBtnGlowCol: '#00e5ff' }
         },
         anims:[{id:'idle',name:'Покой'},{id:'float',name:'Парение'},{id:'pulse',name:'Пульс'},{id:'shake',name:'Тряска'},{id:'glitch',name:'Глюк'},{id:'spin',name:'Вращение'},{id:'neon',name:'Неон'},{id:'wobble',name:'Шатание'},{id:'swing',name:'Качание'},{id:'bounce',name:'Прыжок'},{id:'flip',name:'Переворот'},{id:'ghost',name:'Призрак'}],
         
@@ -453,6 +459,8 @@
             
             bindD('c_title_bg', 'titleBgCol', false);
             bindD('r_title_op', 'titleBgOp', true);
+            bindD('c_title_c1', 'titleCol1', false);
+            bindD('c_title_c2', 'titleCol2', false);
             bindD('c_play_btn', 'playBtnCol', false);
             bindD('r_play_op', 'playBtnOp', true);
             bindD('r_play_glow', 'playBtnGlow', true);
@@ -559,6 +567,8 @@
                 const pTitle = document.getElementById('prev_title_text');
                 pTitle.innerHTML = langTitle.replace(/\|/g, '<br>');
                 pTitle.style.fontFamily = dsg.fontFam;
+                pTitle.style.color = dsg.titleCol1;
+                pTitle.style.textShadow = `4px 4px 0 ${dsg.titleCol2}`;
 
                 const pPlay = document.getElementById('prev_play_btn');
                 pPlay.innerText = langPlay;
@@ -703,7 +713,7 @@ body{margin:0;overflow:hidden;font-family:${d.design.fontFam};user-select:none;w
     aspect-ratio: 16 / 9;
 }
 .overlay{position:fixed;inset:0;background:rgba(${titleBgRgb}, ${d.design.titleBgOp/100});z-index:99;display:flex;flex-direction:column;align-items:center;justify-content:center;}
-.big-title{font-family:${d.design.fontFam};font-size:clamp(24px,5vw,40px);color:#00e5ff;text-align:center;margin-bottom:40px;text-shadow:4px 4px 0 var(--primary);line-height:1.5;}
+.big-title{font-family:${d.design.fontFam};font-size:clamp(24px,5vw,40px);color:${d.design.titleCol1};text-align:center;margin-bottom:40px;text-shadow:4px 4px 0 ${d.design.titleCol2};line-height:1.5;}
 .play-btn{font-family:${d.design.fontFam};background:rgba(${playBtnRgb}, ${d.design.playBtnOp/100});color:#fff;padding:15px 50px;border:2px solid ${d.design.playBtnCol};border-radius:50px;font-size:24px;font-weight:900;cursor:pointer;transition:0.3s;animation:fx-pulse 2s infinite;box-shadow:${d.design.playBtnGlow > 0 ? `0 0 ${d.design.playBtnGlow}px ${d.design.playBtnGlowCol}` : 'none'};}
 .play-btn:hover{filter:brightness(1.2);transform:scale(1.05);}
 .hud{padding:10px 15px;display:flex;justify-content:space-between;align-items:flex-start;width:100%;z-index:10;gap:10px;}
