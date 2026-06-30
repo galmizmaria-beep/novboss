@@ -243,7 +243,7 @@
         <div class="stage" id="stage_bg">
             <div id="preview_title_overlay" style="position:absolute;inset:0;z-index:90;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:0.3s;pointer-events:none;">
                 <div id="prev_title_text" style="font-size:36px;color:#00e5ff;text-align:center;margin-bottom:30px;text-shadow:4px 4px 0 var(--primary);line-height:1.5;"></div>
-                <button id="prev_play_btn" style="padding:15px 40px;border:2px solid;border-radius:50px;font-size:20px;font-weight:900;color:#fff;">ИГРАТЬ</button>
+                <button id="prev_play_btn" onclick="app.testGame()" style="padding:15px 40px;border:2px solid;border-radius:50px;font-size:20px;font-weight:900;color:#fff; cursor:pointer; pointer-events:auto;">ИГРАТЬ</button>
             </div>
             
             <div class="preview-hud" id="preview-hud">
@@ -666,7 +666,7 @@
         },
         previewAnswer(btn,isCorrect){btn.classList.add(isCorrect?'correct':'wrong');setTimeout(()=>btn.classList.remove('correct','wrong'),500);},
         previewInputAnswer(isAuto=false){const input=document.getElementById('preview_input_ans');const q=this.quests[this.previewQuestIndex];if(!input||!q)return;const isCorrect=input.value.trim().toLowerCase()===q.correctInp.trim().toLowerCase();if(isAuto&&!isCorrect)return;input.classList.add(isCorrect?'correct':'wrong');setTimeout(()=>input.classList.remove('correct','wrong'),800);},
-        generate(){
+        getGameHTML(){
             const d=this.data;
             const langData={
                 ru:{title:document.getElementById('i_title_ru').value,win:document.getElementById('i_win_msg_ru').value,lose:document.getElementById('i_lose_msg_ru').value,play:document.getElementById('i_play_btn_ru').value},
@@ -799,7 +799,24 @@ ${generatedOverlay}
 </div></div>
 <div class="ui-panel" id="q-panel"><div class="q-text" id="q-text"></div><div id="q-inputs"></div></div>
 </div>${script}</body></html>`;
+            return html;
+        },
+        generate(){
+            const html = this.getGameHTML();
             const area=document.getElementById('hidden_code');area.value=`<iframe srcdoc="${html.replace(/"/g,'&quot;')}" width="100%" height="100%" frameborder="0" style="background:transparent;display:block"></iframe>`;area.select();document.execCommand('copy');const btn=document.getElementById('b_gen');const old=btn.innerText;btn.innerText="ГОТОВО!";btn.style.background="#fff";setTimeout(()=>{btn.innerText=old;btn.style.background="";},1500);
+        },
+        testGame(){
+            const html = this.getGameHTML();
+            let layer = document.getElementById('test_game_layer');
+            if (!layer) {
+                layer = document.createElement('div');
+                layer.id = 'test_game_layer';
+                layer.style.cssText = 'position:absolute; inset:0; z-index:1000; background:#000; display:flex; flex-direction:column;';
+                layer.innerHTML = `<button onclick="document.getElementById('test_game_layer').style.display='none'; document.getElementById('test_game_frame').srcdoc='';" style="position:absolute; top:10px; right:10px; z-index:1001; padding:10px 15px; background:var(--red); color:#fff; border:none; border-radius:6px; font-family:'Rajdhani', sans-serif; font-weight:bold; cursor:pointer; font-size:14px; box-shadow:0 0 10px var(--red);">ЗАКРЫТЬ ТЕСТ</button><iframe id="test_game_frame" style="width:100%; height:100%; border:none;"></iframe>`;
+                document.getElementById('stage_bg').appendChild(layer);
+            }
+            layer.style.display = 'block';
+            document.getElementById('test_game_frame').srcdoc = html;
         }
     };
     app.init();
