@@ -63,7 +63,16 @@
         }
         
         .char-img { max-width: 100%; max-height: 100%; object-fit: contain; transition: 0.3s; }
-        .quest-dock { position: absolute; bottom: 0; left: 0; right: 0; background: var(--bg-panel); border-top: 3px solid var(--cyan); padding: 15px; z-index: 10; min-height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
+        
+        /* ОБНОВЛЕННЫЙ КЛАСС .quest-dock */
+        .quest-dock { 
+            position: absolute; bottom: 0; left: 0; right: 0; 
+            background: var(--bg-panel); border-top: 3px solid var(--cyan); 
+            padding: 40px 15px 20px 15px; 
+            z-index: 10; min-height: 180px; display: flex; flex-direction: column; 
+            align-items: center; justify-content: flex-start; gap: 15px; 
+        }
+
         .q-preview-text { color: #fff; font-size: 18px; font-weight: 700; text-align: center; margin-top: 20px; }
         .q-preview-btns { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
         .q-dummy-btn { background: #333; color: #fff; padding: 8px 20px; border: 2px solid #555; border-radius: 5px; font-weight: 700; font-size: 12px; cursor: pointer; transition: 0.2s; }
@@ -518,6 +527,8 @@
 
         prevPreviewQuest(){if(this.previewQuestIndex>0){this.previewQuestIndex--;this.updatePreview();}},
         nextPreviewQuest(){if(this.previewQuestIndex<this.quests.length-1){this.previewQuestIndex++;this.updatePreview();}},
+        
+        // ОБНОВЛЕННАЯ ФУНКЦИЯ updatePreview
         updatePreview(){
             const h=this.data.hero;
             const b=this.data.boss;
@@ -555,7 +566,6 @@
                 .timer-preview { font-family: ${dsg.fontFam} !important; background: rgba(${timerBgRgb}, 0.8) !important; color: ${dsg.timerTxt} !important; border-color: ${dsg.timerBg} !important; box-shadow: 0 0 10px ${dsg.timerBg} !important; }
             `;
 
-            // Обновление предпросмотра титульного экрана
             const titleOverlay = document.getElementById('preview_title_overlay');
             if (this.data.titleScreenOn) {
                 titleOverlay.style.display = 'flex';
@@ -563,9 +573,15 @@
                 
                 const langTitle = this.gameLang === 'ru' ? document.getElementById('i_title_ru').value : document.getElementById('i_title_en').value;
                 const langPlay = this.gameLang === 'ru' ? document.getElementById('i_play_btn_ru').value : document.getElementById('i_play_btn_en').value;
-                
                 const pTitle = document.getElementById('prev_title_text');
-                pTitle.innerHTML = langTitle.replace(/\|/g, '<br>');
+                
+                // Перерисовываем текст заголовка, только если он изменился
+                if (this._lastTitle !== langTitle) {
+                    pTitle.innerHTML = langTitle.replace(/\|/g, '<br>');
+                    this._lastTitle = langTitle;
+                    this._needMathJax = true;
+                }
+
                 pTitle.style.fontFamily = dsg.fontFam;
                 pTitle.style.color = dsg.titleCol1;
                 pTitle.style.textShadow = `4px 4px 0 ${dsg.titleCol2}`;
@@ -585,33 +601,46 @@
             document.getElementById('p_timer').style.display=this.data.timerOn?'block':'none';
             document.getElementById('p_timer').innerText=this.data.timerOn?(this.data.timer<10?'0'+this.data.timer:this.data.timer)+':00':'';
             
-            const currentQ=this.quests[this.previewQuestIndex]||{text:'Настройте задания...'};
-            document.getElementById('prev_q_text').innerText=(this.quests.length>0?`(${this.previewQuestIndex+1}/${this.quests.length}) `:'')+currentQ.text;
-            const btnsDiv=document.getElementById('prev_q_btns');
-            btnsDiv.innerHTML='';
+            const currentQ = this.quests[this.previewQuestIndex] || {text:'Настройте задания...'};
+            const questHash = JSON.stringify(currentQ) + this.previewQuestIndex + this.quests.length;
+
             const prevBtn=document.getElementById('prev_q_btn');
             prevBtn.disabled=this.previewQuestIndex===0;
             const nextBtn=document.getElementById('next_q_btn');
             nextBtn.disabled=this.previewQuestIndex>=this.quests.length-1||this.quests.length===0;
 
-            if(this.quests.length>0){
-                if(currentQ.type==='choice'){
-                    let answers=[{t:currentQ.correct,c:true}];
-                    if(currentQ.wrongs[0])answers.push({t:currentQ.wrongs[0],c:false});
-                    if(currentQ.wrongs[1])answers.push({t:currentQ.wrongs[1],c:false});
-                    answers.sort(()=>Math.random()-0.5);
-                    let btnsHTML=answers.map(a=>`<div class="q-dummy-btn" onclick="app.previewAnswer(this,${a.c})">${a.t}</div>`).join('');
-                    btnsDiv.innerHTML=btnsHTML;
-                }else{
-                    btnsDiv.innerHTML=`<input id="preview_input_ans" type="text" class="fx-input" style="width:150px; text-align:center;" placeholder="Ваш ответ..." oninput="app.previewInputAnswer(true)"><div class="q-dummy-btn" onclick="app.previewInputAnswer()">OK</div>`;
+            // Перерисовываем кнопки ответов только если сменился сам вопрос
+            if (this._lastQuestHash !== questHash) {
+                document.getElementById('prev_q_text').innerText=(this.quests.length>0?`(${this.previewQuestIndex+1}/${this.quests.length}) `:'')+currentQ.text;
+                const btnsDiv=document.getElementById('prev_q_btns');
+                btnsDiv.innerHTML='';
+                
+                if(this.quests.length>0){
+                    if(currentQ.type==='choice'){
+                        let answers=[{t:currentQ.correct,c:true}];
+                        if(currentQ.wrongs[0])answers.push({t:currentQ.wrongs[0],c:false});
+                        if(currentQ.wrongs[1])answers.push({t:currentQ.wrongs[1],c:false});
+                        answers.sort(()=>Math.random()-0.5);
+                        let btnsHTML=answers.map(a=>`<div class="q-dummy-btn" onclick="app.previewAnswer(this,${a.c})">${a.t}</div>`).join('');
+                        btnsDiv.innerHTML=btnsHTML;
+                    }else{
+                        btnsDiv.innerHTML=`<input id="preview_input_ans" type="text" class="fx-input" style="width:150px; text-align:center;" placeholder="Ваш ответ..." oninput="app.previewInputAnswer(true)"><div class="q-dummy-btn" onclick="app.previewInputAnswer()">OK</div>`;
+                    }
                 }
+                
+                this._lastQuestHash = questHash;
+                this._needMathJax = true;
             }
             
-            setTimeout(() => {
-                if (window.MathJax) {
-                    MathJax.typesetPromise([document.getElementById('prev_q_text'), document.getElementById('prev_q_btns'), document.getElementById('prev_title_text')]);
-                }
-            }, 50);
+            // Вызываем тяжелый рендер MathJax только когда это нужно
+            if (this._needMathJax) {
+                setTimeout(() => {
+                    if (window.MathJax) {
+                        MathJax.typesetPromise([document.getElementById('prev_q_text'), document.getElementById('prev_q_btns'), document.getElementById('prev_title_text')]);
+                    }
+                    this._needMathJax = false;
+                }, 50);
+            }
 
             document.getElementById('prev_hero_box').style.left = h.posX + '%';
             document.getElementById('prev_boss_box').style.right = b.posX + '%';
