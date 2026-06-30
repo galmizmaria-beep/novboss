@@ -259,7 +259,7 @@
     <textarea id="hidden_code" style="position:absolute;left:-9999px;top:0;opacity:0;"></textarea>
 
     <script>
-        const app={previewQuestIndex:0,currentQuestIndex:-1,quests:[],locations:[],musicFile:null,gameLang:'ru',
+        const app={previewQuestIndex:0,currentQuestIndex:-1,quests:[],locations:[],musicFile:null,gameLang:'ru', mjTimer:null,
         data:{
             hero:{src:'',anim:'idle',size:100,gC:'#00e5ff',gP:0,speed:3, landingOffset: 15, posX: 10},
             boss:{src:'',anim:'idle',size:100,gC:'#ff0055',gP:0,speed:3, landingOffset: 15, posX: 10},
@@ -555,6 +555,8 @@
                 .timer-preview { font-family: ${dsg.fontFam} !important; background: rgba(${timerBgRgb}, 0.8) !important; color: ${dsg.timerTxt} !important; border-color: ${dsg.timerBg} !important; box-shadow: 0 0 10px ${dsg.timerBg} !important; }
             `;
 
+            let needMj = false;
+
             // Обновление предпросмотра титульного экрана
             const titleOverlay = document.getElementById('preview_title_overlay');
             if (this.data.titleScreenOn) {
@@ -565,7 +567,12 @@
                 const langPlay = this.gameLang === 'ru' ? document.getElementById('i_play_btn_ru').value : document.getElementById('i_play_btn_en').value;
                 
                 const pTitle = document.getElementById('prev_title_text');
-                pTitle.innerHTML = langTitle.replace(/\|/g, '<br>');
+                const titleHtml = langTitle.replace(/\|/g, '<br>');
+                if(pTitle.dataset.raw !== titleHtml) {
+                    pTitle.innerHTML = titleHtml;
+                    pTitle.dataset.raw = titleHtml;
+                    needMj = true;
+                }
                 pTitle.style.fontFamily = dsg.fontFam;
                 pTitle.style.color = dsg.titleCol1;
                 pTitle.style.textShadow = `4px 4px 0 ${dsg.titleCol2}`;
@@ -586,32 +593,48 @@
             document.getElementById('p_timer').innerText=this.data.timerOn?(this.data.timer<10?'0'+this.data.timer:this.data.timer)+':00':'';
             
             const currentQ=this.quests[this.previewQuestIndex]||{text:'Настройте задания...'};
-            document.getElementById('prev_q_text').innerText=(this.quests.length>0?`(${this.previewQuestIndex+1}/${this.quests.length}) `:'')+currentQ.text;
+            const prevQText = document.getElementById('prev_q_text');
+            const qTextStr = (this.quests.length>0?`(${this.previewQuestIndex+1}/${this.quests.length}) `:'')+currentQ.text;
+            if(prevQText.dataset.raw !== qTextStr) {
+                prevQText.innerHTML = qTextStr;
+                prevQText.dataset.raw = qTextStr;
+                needMj = true;
+            }
+
             const btnsDiv=document.getElementById('prev_q_btns');
-            btnsDiv.innerHTML='';
             const prevBtn=document.getElementById('prev_q_btn');
             prevBtn.disabled=this.previewQuestIndex===0;
             const nextBtn=document.getElementById('next_q_btn');
             nextBtn.disabled=this.previewQuestIndex>=this.quests.length-1||this.quests.length===0;
 
             if(this.quests.length>0){
+                let newBtnsHtml = '';
                 if(currentQ.type==='choice'){
                     let answers=[{t:currentQ.correct,c:true}];
                     if(currentQ.wrongs[0])answers.push({t:currentQ.wrongs[0],c:false});
                     if(currentQ.wrongs[1])answers.push({t:currentQ.wrongs[1],c:false});
-                    answers.sort(()=>Math.random()-0.5);
-                    let btnsHTML=answers.map(a=>`<div class="q-dummy-btn" onclick="app.previewAnswer(this,${a.c})">${a.t}</div>`).join('');
-                    btnsDiv.innerHTML=btnsHTML;
+                    newBtnsHtml=answers.map(a=>`<div class="q-dummy-btn" onclick="app.previewAnswer(this,${a.c})">${a.t}</div>`).join('');
                 }else{
-                    btnsDiv.innerHTML=`<input id="preview_input_ans" type="text" class="fx-input" style="width:150px; text-align:center;" placeholder="Ваш ответ..." oninput="app.previewInputAnswer(true)"><div class="q-dummy-btn" onclick="app.previewInputAnswer()">OK</div>`;
+                    newBtnsHtml=`<input id="preview_input_ans" type="text" class="fx-input" style="width:150px; text-align:center;" placeholder="Ваш ответ..." oninput="app.previewInputAnswer(true)"><div class="q-dummy-btn" onclick="app.previewInputAnswer()">OK</div>`;
+                }
+                if(btnsDiv.dataset.raw !== newBtnsHtml) {
+                    btnsDiv.innerHTML = newBtnsHtml;
+                    btnsDiv.dataset.raw = newBtnsHtml;
+                    needMj = true;
+                }
+            } else {
+                if(btnsDiv.dataset.raw !== '') {
+                    btnsDiv.innerHTML = '';
+                    btnsDiv.dataset.raw = '';
                 }
             }
             
-            setTimeout(() => {
-                if (window.MathJax) {
+            if (needMj && window.MathJax) {
+                clearTimeout(this.mjTimer);
+                this.mjTimer = setTimeout(() => {
                     MathJax.typesetPromise([document.getElementById('prev_q_text'), document.getElementById('prev_q_btns'), document.getElementById('prev_title_text')]);
-                }
-            }, 50);
+                }, 50);
+            }
 
             document.getElementById('prev_hero_box').style.left = h.posX + '%';
             document.getElementById('prev_boss_box').style.right = b.posX + '%';
