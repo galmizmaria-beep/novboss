@@ -118,8 +118,8 @@
                         <div class="control-group">
                             <span class="control-label">Имя Героя</span>
                             <input type="text" class="fx-input" id="i_h_name" value="Герой">
-                            <span class="control-label" style="margin-top:10px;">Изображение (файл)</span>
-                            <button class="fx-btn" style="width:100%" onclick="document.getElementById('f_hero').click()">ЗАГРУЗИТЬ ИЗ ФАЙЛА</button>
+                            <span class="control-label" style="margin-top:10px;">Изображение или GIF (файл)</span>
+                            <button class="fx-btn" style="width:100%" onclick="document.getElementById('f_hero').click()">ЗАГРУЗИТЬ ИЗОБРАЖЕНИЕ / GIF</button>
                             <input type="file" id="f_hero" hidden accept="image/*">
                             <span class="control-label" style="margin-top:10px;">Изображение (URL)</span>
                             <div style="display:flex; gap:5px;"><input type="text" class="fx-input" id="i_h_url" placeholder="Вставьте URL"><button class="fx-btn" style="flex-shrink:0;" onclick="app.handleImageURL(document.getElementById('i_h_url').value, 'hero')">ИСПОЛЬЗОВАТЬ</button></div>
@@ -142,8 +142,8 @@
                         <div class="control-group">
                             <span class="control-label">Имя Босса</span>
                             <input type="text" class="fx-input" id="i_b_name" value="Босс">
-                            <span class="control-label" style="margin-top:10px;">Изображение (файл)</span>
-                            <button class="fx-btn" style="width:100%" onclick="document.getElementById('f_boss').click()">ЗАГРУЗИТЬ ИЗ ФАЙЛА</button>
+                            <span class="control-label" style="margin-top:10px;">Изображение или GIF (файл)</span>
+                            <button class="fx-btn" style="width:100%" onclick="document.getElementById('f_boss').click()">ЗАГРУЗИТЬ ИЗОБРАЖЕНИЕ / GIF</button>
                             <input type="file" id="f_boss" hidden accept="image/*">
                             <span class="control-label" style="margin-top:10px;">Изображение (URL)</span>
                             <div style="display:flex; gap:5px;"><input type="text" class="fx-input" id="i_b_url" placeholder="Вставьте URL"><button class="fx-btn" style="flex-shrink:0;" onclick="app.handleImageURL(document.getElementById('i_b_url').value, 'boss')">ИСПОЛЬЗОВАТЬ</button></div>
@@ -230,7 +230,9 @@
                             </select>
                         </div>
                         <div class="param-row"><span>Размер вопроса</span><input type="range" id="r_q_font_size" min="12" max="64" value="24" style="width:60%"></div>
+                        <div class="param-row"><span>Цвет текста вопроса</span><input type="color" id="c_q_text" value="#ffffff" style="border:none;width:20px;height:20px;background:none;padding:0;"></div>
                         <div class="param-row"><span>Размер ответа</span><input type="range" id="r_a_font_size" min="10" max="48" value="18" style="width:60%"></div>
+                        <div class="param-row"><span>Цвет текста задания</span><input type="color" id="c_a_text" value="#ffffff" style="border:none;width:20px;height:20px;background:none;padding:0;"></div>
                     </div>
 
                     <div class="control-group"><span class="control-label">Язык Игры</span><div class="sub-tabs" style="padding:0 0 10px 0;"><button class="sub-tab-link active" onclick="app.setGameLang('ru')">RU</button><button class="sub-tab-link" onclick="app.setGameLang('en')">EN</button></div><div id="lang_ru_fields"><label style="font-size:9px;color:#888;">Заголовок ( | = перенос):</label><input type="text" class="fx-input" id="i_title_ru" value="БИТВА|С БОССОМ"><label style="font-size:9px;color:#888;">Победа:</label><input type="text" class="fx-input" id="i_win_msg_ru" value="ТЫ ПОБЕДИЛ!"><label style="font-size:9px;color:#888;">Поражение:</label><input type="text" class="fx-input" id="i_lose_msg_ru" value="ТЫ ПРОИГРАЛ!"><label style="font-size:9px;color:#888;">Кнопка старт:</label><input type="text" class="fx-input" id="i_play_btn_ru" value="ИГРАТЬ"></div><div id="lang_en_fields" style="display:none;"><label style="font-size:9px;color:#888;">Title ( | = new line):</label><input type="text" class="fx-input" id="i_title_en" value="BOSS|BATTLE"><label style="font-size:9px;color:#888;">Win:</label><input type="text" class="fx-input" id="i_win_msg_en" value="YOU WIN!"><label style="font-size:9px;color:#888;">Lose:</label><input type="text" class="fx-input" id="i_lose_msg_en" value="YOU LOSE!"><label style="font-size:9px;color:#888;">Start Button:</label><input type="text" class="fx-input" id="i_play_btn_en" value="PLAY"></div></div>
@@ -238,7 +240,14 @@
                     <div id="quest-editor-panel"><div class="control-group"><span class="control-label" id="editor-title">РЕДАКТОР</span><div class="sub-tabs"><button class="sub-tab-link active" onclick="app.setQType('choice')" id="b_choice">ВЫБОР</button><button class="sub-tab-link" onclick="app.setQType('input')" id="b_input">ВВОД</button></div><span class="control-label">Текст вопроса</span><textarea class="fx-textarea" id="i_q_text" rows="2"></textarea><div id="area_choice"><span class="control-label" style="color:var(--green)">Верный ответ</span><input type="text" class="fx-input" id="i_c_ans"><span class="control-label" style="color:var(--primary)">Неверные ответы</span><input type="text" class="fx-input" id="i_w1"><input type="text" class="fx-input" id="i_w2"></div><div id="area_input" style="display:none"><span class="control-label" style="color:var(--green)">Правильный текст</span><input type="text" class="fx-input" id="i_in_ans"></div><button class="fx-btn" style="width:100%;margin-top:10px;background:var(--green);color:#000;border-color:var(--green)" onclick="app.saveQuest()">СОХРАНИТЬ</button></div></div>
                 </div>
             </div>
-            <div class="gen-panel"><button class="btn-generate" onclick="app.generate()" id="b_gen">СКОПИРОВАТЬ КОД</button></div>
+            <div class="gen-panel">
+                <div style="display:flex;gap:6px;margin-bottom:8px;">
+                    <button class="fx-btn" style="flex:1" onclick="app.saveProject()">СОХРАНИТЬ ПРОЕКТ</button>
+                    <button class="fx-btn" style="flex:1" onclick="document.getElementById('f_project').click()">ЗАГРУЗИТЬ ПРОЕКТ</button>
+                    <input type="file" id="f_project" hidden accept=".novboss,.json,application/json">
+                </div>
+                <button class="btn-generate" onclick="app.generate()" id="b_gen">СКОПИРОВАТЬ КОД</button>
+            </div>
         </div>
         <div class="stage" id="stage_bg">
             <div id="preview_title_overlay" style="position:absolute;inset:0;z-index:90;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:0.3s;pointer-events:none;">
@@ -275,7 +284,7 @@
             timer:5,
             timerOn:true,
             titleScreenOn:true,
-            design: { bgCol: '#12101e', bgOp: 0, sepLine: '#00d2ff', timerBg: '#231f34', timerTxt: '#ffd700', plateBg: '#231f34', plateOp: 80, btnCol: '#333333', btnGlow: 0, btnGlowCol: '#00e5ff', panelCol: '#12101e', panelOp: 95, hpHero: '#00ff88', hpBoss: '#ff3b30', hpBorder: '#111111', hpGlow: 0, hpGlowCol: '#8a2be2', fontFam: "'Montserrat', sans-serif", qFontSize: 24, aFontSize: 18, titleBgCol: '#12101e', titleBgOp: 95, titleCol1: '#00e5ff', titleCol2: '#8a2be2', playBtnCol: '#00d2ff', playBtnOp: 20, playBtnGlow: 10, playBtnGlowCol: '#00e5ff' }
+            design: { bgCol: '#12101e', bgOp: 0, sepLine: '#00d2ff', timerBg: '#231f34', timerTxt: '#ffd700', plateBg: '#231f34', plateOp: 80, btnCol: '#333333', btnGlow: 0, btnGlowCol: '#00e5ff', panelCol: '#12101e', panelOp: 95, hpHero: '#00ff88', hpBoss: '#ff3b30', hpBorder: '#111111', hpGlow: 0, hpGlowCol: '#8a2be2', fontFam: "'Montserrat', sans-serif", qFontSize: 24, qTextCol: '#ffffff', aFontSize: 18, aTextCol: '#ffffff', titleBgCol: '#12101e', titleBgOp: 95, titleCol1: '#00e5ff', titleCol2: '#8a2be2', playBtnCol: '#00d2ff', playBtnOp: 20, playBtnGlow: 10, playBtnGlowCol: '#00e5ff' }
         },
         anims:[{id:'idle',name:'Покой'},{id:'float',name:'Парение'},{id:'pulse',name:'Пульс'},{id:'shake',name:'Тряска'},{id:'glitch',name:'Глюк'},{id:'spin',name:'Вращение'},{id:'neon',name:'Неон'},{id:'wobble',name:'Шатание'},{id:'swing',name:'Качание'},{id:'bounce',name:'Прыжок'},{id:'flip',name:'Переворот'},{id:'ghost',name:'Призрак'}],
         
@@ -294,6 +303,33 @@
 
         async loadImageAndCompress(source, quality = 0.6, maxWidth = 1024, maxHeight = 1024) {
             return new Promise(async (resolve) => {
+                const readOriginal = blob => {
+                    const reader = new FileReader();
+                    reader.onload = e => resolve(e.target.result);
+                    reader.onerror = () => resolve('');
+                    reader.readAsDataURL(blob);
+                };
+
+                // Canvas уничтожает кадры анимированного GIF, поэтому GIF сохраняется без преобразования.
+                if (source instanceof File && source.type === 'image/gif') {
+                    readOriginal(source);
+                    return;
+                }
+                if (typeof source === 'string' && source.startsWith('data:image/gif')) {
+                    resolve(source);
+                    return;
+                }
+                if (typeof source === 'string' && /\.gif(?:[?#].*)?$/i.test(source)) {
+                    try {
+                        const response = await fetch(source, { mode: 'cors' });
+                        if (!response.ok) throw new Error('GIF download failed');
+                        readOriginal(await response.blob());
+                    } catch (error) {
+                        // Ссылка останется рабочей в редакторе и игре, если сервер запрещает CORS.
+                        resolve(source);
+                    }
+                    return;
+                }
                 const img = new Image();
                 let detectedMimeType = 'image/jpeg';
 
@@ -406,6 +442,7 @@
             document.getElementById('f_boss').onchange=e=>this.handleImage(e.target.files[0],'boss');
             document.getElementById('f_loc').onchange=e=>this.handleLocations(e.target.files);
             document.getElementById('f_music').onchange=e=>this.handleMusic(e.target.files[0]);
+            document.getElementById('f_project').onchange=e=>{this.loadProjectFile(e.target.files[0]);e.target.value='';};
             
             document.getElementById('chk_title_screen').onchange=e=>{this.data.titleScreenOn=e.target.checked;this.updatePreview();};
 
@@ -464,7 +501,9 @@
             bindD('c_hp_glow', 'hpGlowCol', false);
             bindD('s_font', 'fontFam', false);
             bindD('r_q_font_size', 'qFontSize', true);
+            bindD('c_q_text', 'qTextCol', false);
             bindD('r_a_font_size', 'aFontSize', true);
+            bindD('c_a_text', 'aTextCol', false);
             
             bindD('c_title_bg', 'titleBgCol', false);
             bindD('r_title_op', 'titleBgOp', true);
@@ -554,14 +593,14 @@
             styleTag.innerHTML = `
                 .hud-char-name { font-family: ${dsg.fontFam} !important; }
                 .quest-dock { background: rgba(${panelRgb}, ${dsg.panelOp / 100}) !important; font-family: ${dsg.fontFam} !important; border-top-color: ${dsg.sepLine} !important; }
-                .q-preview-text { font-size: ${dsg.qFontSize}px !important; font-family: ${dsg.fontFam} !important; }
-                .q-dummy-btn { background: ${dsg.btnCol} !important; font-family: ${dsg.fontFam} !important; font-size: ${dsg.aFontSize}px !important; box-shadow: ${dsg.btnGlow > 0 ? `0 0 ${dsg.btnGlow}px ${dsg.btnGlowCol}` : 'none'} !important; border-color: ${dsg.btnCol} !important; }
+                .q-preview-text { color: ${dsg.qTextCol} !important; font-size: ${dsg.qFontSize}px !important; font-family: ${dsg.fontFam} !important; }
+                .q-dummy-btn { background: ${dsg.btnCol} !important; color: ${dsg.aTextCol} !important; font-family: ${dsg.fontFam} !important; font-size: ${dsg.aFontSize}px !important; box-shadow: ${dsg.btnGlow > 0 ? `0 0 ${dsg.btnGlow}px ${dsg.btnGlowCol}` : 'none'} !important; border-color: ${dsg.btnCol} !important; }
                 .q-dummy-btn.correct { background: var(--green) !important; box-shadow: 0 0 10px var(--green) !important; border-color: var(--green) !important; color: #000 !important; }
                 .q-dummy-btn.wrong { background: var(--red) !important; box-shadow: 0 0 10px var(--red) !important; border-color: var(--red) !important; }
                 #hp_h_preview { background: ${dsg.hpHero} !important; }
                 #hp_b_preview { background: ${dsg.hpBoss} !important; }
                 .hp-bar-preview { border-color: ${dsg.hpBorder} !important; box-shadow: ${dsg.hpGlow > 0 ? `0 0 ${dsg.hpGlow}px ${dsg.hpGlowCol}` : 'none'} !important; }
-                #preview_input_ans { font-family: ${dsg.fontFam} !important; font-size: ${dsg.aFontSize}px !important; }
+                #preview_input_ans { color: ${dsg.aTextCol} !important; font-family: ${dsg.fontFam} !important; font-size: ${dsg.aFontSize}px !important; }
                 .hud-player { background: rgba(${plateRgb}, ${dsg.plateOp/100}) !important; border-radius: 20px !important; padding: 8px 15px !important; box-shadow: 0 0 10px ${dsg.plateBg}, inset 0 0 8px rgba(0,0,0,0.5) !important; }
                 .timer-preview { font-family: ${dsg.fontFam} !important; background: rgba(${timerBgRgb}, 0.8) !important; color: ${dsg.timerTxt} !important; border-color: ${dsg.timerBg} !important; box-shadow: 0 0 10px ${dsg.timerBg} !important; }
             `;
@@ -767,14 +806,14 @@ body{margin:0;overflow:hidden;font-family:${d.design.fontFam};user-select:none;w
 .score-popup{position:fixed;z-index:101;opacity:0;font-family:${d.design.fontFam};font-size:20px;transform:translateX(-50%);pointer-events:none;}
 .score-popup.show{animation:float-up-fade 1s ease-out forwards;}
 .ui-panel{position:absolute; bottom:0; left:0; right:0; background:rgba(${panelRgb},${d.design.panelOp/100});padding:20px;border-top:4px solid ${d.design.sepLine};display:flex;flex-direction:column;align-items:center;gap:15px;min-height:20%;box-shadow:0 -10px 50px rgba(0,0,0,0.5);z-index:20;}
-.q-text{color:#fff;font-size:${d.design.qFontSize}px;font-weight:700;text-align:center;font-family:${d.design.fontFam};}
+.q-text{color:${d.design.qTextCol};font-size:${d.design.qFontSize}px;font-weight:700;text-align:center;font-family:${d.design.fontFam};}
 .btns{display:flex;gap:15px;flex-wrap:wrap;justify-content:center;width:100%;}
-.game-btn{background:${d.design.btnCol};border:2px solid ${d.design.btnCol};box-shadow:${d.design.btnGlow > 0 ? `0 0 ${d.design.btnGlow}px ${d.design.btnGlowCol}` : 'none'};color:#fff;padding:15px 30px;font-family:${d.design.fontFam};font-weight:700;font-size:${d.design.aFontSize}px;cursor:pointer;text-transform:uppercase;border-radius:8px;transition:0.1s;min-width:150px;}
+.game-btn{background:${d.design.btnCol};border:2px solid ${d.design.btnCol};box-shadow:${d.design.btnGlow > 0 ? `0 0 ${d.design.btnGlow}px ${d.design.btnGlowCol}` : 'none'};color:${d.design.aTextCol};padding:15px 30px;font-family:${d.design.fontFam};font-weight:700;font-size:${d.design.aFontSize}px;cursor:pointer;text-transform:uppercase;border-radius:8px;transition:0.1s;min-width:150px;}
 .game-btn:hover{background:#555;border-color:#fff;transform:translateY(-2px);}
 .game-btn:disabled { opacity: 0.7; cursor: not-allowed; }
 .inp-area{display:flex;flex-direction:column;align-items:center;gap:10px;position:relative;}
 .inp-row{display:flex;gap:10px;}
-input[type=text]{padding:15px;border-radius:6px;border:2px solid #fff;font-family:${d.design.fontFam};font-weight:700;background:#000;color:#fff;font-size:${d.design.aFontSize}px;outline:none; transition: 0.3s;}
+input[type=text]{padding:15px;border-radius:6px;border:2px solid #fff;font-family:${d.design.fontFam};font-weight:700;background:#000;color:${d.design.aTextCol};font-size:${d.design.aFontSize}px;outline:none; transition: 0.3s;}
 .correct-answer-hint { color: var(--green); margin-top: 5px; font-size: 18px; font-weight: 700; text-align: center; text-shadow: 0 0 5px #000; font-family:${d.design.fontFam};}
 </style></head><body>
 ${this.musicFile?`<audio id="bg-music" src="${this.musicFile.data}" loop></audio>`:''}
@@ -800,6 +839,87 @@ ${generatedOverlay}
 <div class="ui-panel" id="q-panel"><div class="q-text" id="q-text"></div><div id="q-inputs"></div></div>
 </div>${script}</body></html>`;
             return html;
+        },
+        syncQuestDraft(){
+            if(this.currentQuestIndex<0||document.getElementById('quest-editor-panel').style.display==='none')return;
+            const q=this.quests[this.currentQuestIndex];
+            if(!q)return;
+            q.type=document.querySelector('#quest-editor-panel .sub-tab-link.active').id==='b_choice'?'choice':'input';
+            q.text=document.getElementById('i_q_text').value;
+            q.correct=document.getElementById('i_c_ans').value;
+            q.wrongs=[document.getElementById('i_w1').value,document.getElementById('i_w2').value];
+            q.correctInp=document.getElementById('i_in_ans').value;
+        },
+        getProjectState(){
+            this.syncQuestDraft();
+            return {
+                format:'novboss-project',version:1,savedAt:new Date().toISOString(),
+                data:this.data,quests:this.quests,locations:this.locations,musicFile:this.musicFile,
+                gameLang:this.gameLang,previewQuestIndex:this.previewQuestIndex,
+                texts:{
+                    heroName:document.getElementById('i_h_name').value,bossName:document.getElementById('i_b_name').value,
+                    titleRu:document.getElementById('i_title_ru').value,winRu:document.getElementById('i_win_msg_ru').value,loseRu:document.getElementById('i_lose_msg_ru').value,playRu:document.getElementById('i_play_btn_ru').value,
+                    titleEn:document.getElementById('i_title_en').value,winEn:document.getElementById('i_win_msg_en').value,loseEn:document.getElementById('i_lose_msg_en').value,playEn:document.getElementById('i_play_btn_en').value
+                }
+            };
+        },
+        saveProject(){
+            const project=this.getProjectState();
+            const blob=new Blob([JSON.stringify(project)],{type:'application/json'});
+            const link=document.createElement('a');
+            link.href=URL.createObjectURL(blob);
+            link.download=`novboss-project-${new Date().toISOString().slice(0,10)}.novboss`;
+            document.body.appendChild(link);link.click();link.remove();
+            setTimeout(()=>URL.revokeObjectURL(link.href),1000);
+        },
+        async loadProjectFile(file){
+            if(!file)return;
+            try{
+                const project=JSON.parse(await file.text());
+                if(!project||project.format!=='novboss-project'||!project.data||!Array.isArray(project.quests))throw new Error('Файл не является проектом NovBoss');
+                this.applyProject(project);
+            }catch(error){
+                alert('Не удалось загрузить проект: '+error.message);
+            }
+        },
+        applyProject(project){
+            const defaults=this.data;
+            this.data={
+                ...defaults,...project.data,
+                hero:{...defaults.hero,...(project.data.hero||{})},
+                boss:{...defaults.boss,...(project.data.boss||{})},
+                design:{...defaults.design,...(project.data.design||{})}
+            };
+            this.quests=project.quests.map(q=>({...q,wrongs:Array.isArray(q.wrongs)?q.wrongs:['','']}));
+            this.locations=Array.isArray(project.locations)?project.locations:[];
+            this.musicFile=project.musicFile||null;
+            this.previewQuestIndex=Math.min(Math.max(Number(project.previewQuestIndex)||0,0),Math.max(this.quests.length-1,0));
+            this.currentQuestIndex=-1;
+            const t=project.texts||{};
+            const values={
+                i_h_name:t.heroName??'Герой',i_b_name:t.bossName??'Босс',
+                i_title_ru:t.titleRu??'БИТВА|С БОССОМ',i_win_msg_ru:t.winRu??'ТЫ ПОБЕДИЛ!',i_lose_msg_ru:t.loseRu??'ТЫ ПРОИГРАЛ!',i_play_btn_ru:t.playRu??'ИГРАТЬ',
+                i_title_en:t.titleEn??'BOSS|BATTLE',i_win_msg_en:t.winEn??'YOU WIN!',i_lose_msg_en:t.loseEn??'YOU LOSE!',i_play_btn_en:t.playEn??'PLAY',
+                r_h_size:this.data.hero.size,r_h_glow:this.data.hero.gP,r_h_speed:this.data.hero.speed,r_h_landing:this.data.hero.landingOffset,r_h_posx:this.data.hero.posX,c_h_glow:this.data.hero.gC,
+                r_b_size:this.data.boss.size,r_b_glow:this.data.boss.gP,r_b_speed:this.data.boss.speed,r_b_landing:this.data.boss.landingOffset,r_b_posx:this.data.boss.posX,c_b_glow:this.data.boss.gC,
+                r_timer:this.data.timer,
+                c_bg_col:this.data.design.bgCol,r_bg_op:this.data.design.bgOp,c_sep_line:this.data.design.sepLine,c_timer_bg:this.data.design.timerBg,c_timer_txt:this.data.design.timerTxt,
+                c_plate_bg:this.data.design.plateBg,r_plate_op:this.data.design.plateOp,c_btn_col:this.data.design.btnCol,r_btn_glow:this.data.design.btnGlow,c_btn_glow:this.data.design.btnGlowCol,
+                c_panel_col:this.data.design.panelCol,r_panel_op:this.data.design.panelOp,c_hp_hero:this.data.design.hpHero,c_hp_boss:this.data.design.hpBoss,c_hp_border:this.data.design.hpBorder,
+                r_hp_glow:this.data.design.hpGlow,c_hp_glow:this.data.design.hpGlowCol,s_font:this.data.design.fontFam,r_q_font_size:this.data.design.qFontSize,c_q_text:this.data.design.qTextCol,
+                r_a_font_size:this.data.design.aFontSize,c_a_text:this.data.design.aTextCol,c_title_bg:this.data.design.titleBgCol,r_title_op:this.data.design.titleBgOp,
+                c_title_c1:this.data.design.titleCol1,c_title_c2:this.data.design.titleCol2,c_play_btn:this.data.design.playBtnCol,r_play_op:this.data.design.playBtnOp,r_play_glow:this.data.design.playBtnGlow,c_play_glow:this.data.design.playBtnGlowCol
+            };
+            Object.entries(values).forEach(([id,value])=>{const el=document.getElementById(id);if(el&&value!==undefined)el.value=value;});
+            document.getElementById('chk_timer').checked=!!this.data.timerOn;
+            document.getElementById('chk_title_screen').checked=!!this.data.titleScreenOn;
+            document.getElementById('val_timer').innerText=this.data.timer;
+            document.getElementById('val_h_landing').innerText=this.data.hero.landingOffset+'%';document.getElementById('val_b_landing').innerText=this.data.boss.landingOffset+'%';
+            document.getElementById('val_h_posx').innerText=this.data.hero.posX+'%';document.getElementById('val_b_posx').innerText=this.data.boss.posX+'%';
+            document.getElementById('music_name').textContent=this.musicFile?'Файл: '+this.musicFile.name:'';
+            document.getElementById('quest-list-container').style.display='block';document.getElementById('quest-editor-panel').style.display='none';
+            this._lastQuestHash='';this._lastTitle='';this.gameLang=project.gameLang==='en'?'en':'ru';
+            this.renderAnims('hero');this.renderAnims('boss');this.renderLocationList();this.renderQuestList();this.setGameLang(this.gameLang);this.updatePreview();
         },
         generate(){
             const html = this.getGameHTML();
