@@ -58,7 +58,7 @@
         
         .char-box { 
             width: 40%; height: auto; display: flex; align-items: flex-end; justify-content: center; 
-            position: absolute; transition: bottom 0.3s ease-out, left 0.3s ease-out, right 0.3s ease-out;
+            position: absolute; transition: top 0.3s ease-out, translate 0.3s ease-out, left 0.3s ease-out, right 0.3s ease-out;
         }
         
         .char-img { max-width: 100%; max-height: 100%; object-fit: contain; transition: 0.3s; }
@@ -126,8 +126,8 @@
                         <div class="control-group"><span class="control-label">Анимация</span><div class="anim-grid" id="ag_hero"></div></div>
                         <div class="control-group"><span class="control-label">Параметры</span><div class="param-row"><span>Размер</span><input type="range" id="r_h_size" min="50" max="150" value="100" style="width:60%"></div><div class="param-row"><span>Свечение</span><input type="range" id="r_h_glow" min="0" max="50" value="0" style="width:60%"><input type="color" id="c_h_glow" value="#00e5ff" style="border:none;width:20px;height:20px;background:none;padding:0;"></div><div class="param-row"><span>Скорость анимации</span><input type="range" id="r_h_speed" min="1" max="10" value="3" style="width:60%"></div>
                             <div class="param-row">
-                                <span>Приземление</span>
-                                <input type="range" id="r_h_landing" min="0" max="40" value="15" style="width:60%">
+                                <span>Приземление (низ ↔ верх)</span>
+                                <input type="range" id="r_h_landing" min="0" max="100" value="15" style="width:60%">
                                 <span id="val_h_landing" style="width:10%; text-align: right;">15%</span>
                             </div>
                             <div class="param-row">
@@ -150,8 +150,8 @@
                         <div class="control-group"><span class="control-label">Анимация</span><div class="anim-grid" id="ag_boss"></div></div>
                         <div class="control-group"><span class="control-label">Параметры</span><div class="param-row"><span>Размер</span><input type="range" id="r_b_size" min="50" max="150" value="100" style="width:60%"></div><div class="param-row"><span>Свечение</span><input type="range" id="r_b_glow" min="0" max="50" value="0" style="width:60%"><input type="color" id="c_b_glow" value="#ff0055" style="border:none;width:20px;height:20px;background:none;padding:0;"></div><div class="param-row"><span>Скорость анимации</span><input type="range" id="r_b_speed" min="1" max="10" value="3" style="width:60%"></div>
                             <div class="param-row">
-                                <span>Приземление</span>
-                                <input type="range" id="r_b_landing" min="0" max="40" value="15" style="width:60%">
+                                <span>Приземление (низ ↔ верх)</span>
+                                <input type="range" id="r_b_landing" min="0" max="100" value="15" style="width:60%">
                                 <span id="val_b_landing" style="width:10%; text-align: right;">15%</span>
                             </div>
                             <div class="param-row">
@@ -193,6 +193,8 @@
                                 <input type="color" id="c_title_c2" value="#8a2be2" style="border:none;width:20px;height:20px;background:none;padding:0;">
                             </div>
                         </div>
+                        <div class="param-row"><span>Цвет текста победы</span><input type="color" id="c_win_text" value="#00ff88" style="border:none;width:20px;height:20px;background:none;padding:0;"></div>
+                        <div class="param-row"><span>Цвет текста поражения</span><input type="color" id="c_lose_text" value="#ff3b30" style="border:none;width:20px;height:20px;background:none;padding:0;"></div>
                         <div class="param-row"><span>Цвет кнопки "Играть"</span><input type="color" id="c_play_btn" value="#00d2ff" style="border:none;width:20px;height:20px;background:none;padding:0;"></div>
                         <div class="param-row"><span>Прозрачность кн. "Играть"</span><input type="range" id="r_play_op" min="0" max="100" value="20" style="width:50%"></div>
                         <div class="param-row"><span>Свечение кн. "Играть"</span><input type="range" id="r_play_glow" min="0" max="50" value="10" style="width:40%"><input type="color" id="c_play_glow" value="#00e5ff" style="border:none;width:20px;height:20px;background:none;padding:0;"></div>
@@ -293,7 +295,7 @@
             timer:5,
             timerOn:true,
             titleScreenOn:true,
-            design: { bgCol: '#12101e', bgOp: 0, sepLine: '#00d2ff', timerBg: '#231f34', timerTxt: '#ffd700', plateBg: '#231f34', plateOp: 80, btnCol: '#333333', btnGlow: 0, btnGlowCol: '#00e5ff', panelCol: '#12101e', panelOp: 95, hpHero: '#00ff88', hpBoss: '#ff3b30', hpBorder: '#111111', hpGlow: 0, hpGlowCol: '#8a2be2', fontFam: "'Montserrat', sans-serif", qFontSize: 24, qTextCol: '#ffffff', aFontSize: 18, aTextCol: '#ffffff', titleBgCol: '#12101e', titleBgOp: 95, titleCol1: '#00e5ff', titleCol2: '#8a2be2', playBtnCol: '#00d2ff', playBtnOp: 20, playBtnGlow: 10, playBtnGlowCol: '#00e5ff' }
+            design: { bgCol: '#12101e', bgOp: 0, sepLine: '#00d2ff', timerBg: '#231f34', timerTxt: '#ffd700', plateBg: '#231f34', plateOp: 80, btnCol: '#333333', btnGlow: 0, btnGlowCol: '#00e5ff', panelCol: '#12101e', panelOp: 95, hpHero: '#00ff88', hpBoss: '#ff3b30', hpBorder: '#111111', hpGlow: 0, hpGlowCol: '#8a2be2', fontFam: "'Montserrat', sans-serif", qFontSize: 24, qTextCol: '#ffffff', aFontSize: 18, aTextCol: '#ffffff', titleBgCol: '#12101e', titleBgOp: 95, titleCol1: '#00e5ff', titleCol2: '#8a2be2', winTextCol: '#00ff88', loseTextCol: '#ff3b30', playBtnCol: '#00d2ff', playBtnOp: 20, playBtnGlow: 10, playBtnGlowCol: '#00e5ff' }
         },
         anims:[{id:'idle',name:'Покой'},{id:'float',name:'Парение'},{id:'pulse',name:'Пульс'},{id:'shake',name:'Тряска'},{id:'glitch',name:'Глюк'},{id:'spin',name:'Вращение'},{id:'neon',name:'Неон'},{id:'wobble',name:'Шатание'},{id:'swing',name:'Качание'},{id:'bounce',name:'Прыжок'},{id:'flip',name:'Переворот'},{id:'ghost',name:'Призрак'}],
         
@@ -518,6 +520,8 @@
             bindD('r_title_op', 'titleBgOp', true);
             bindD('c_title_c1', 'titleCol1', false);
             bindD('c_title_c2', 'titleCol2', false);
+            bindD('c_win_text', 'winTextCol', false);
+            bindD('c_lose_text', 'loseTextCol', false);
             bindD('c_play_btn', 'playBtnCol', false);
             bindD('r_play_op', 'playBtnOp', true);
             bindD('r_play_glow', 'playBtnGlow', true);
@@ -697,7 +701,10 @@
                 const img=document.getElementById(elId);
                 const charBox = img.parentNode;
                 img.src=d.src;
-                charBox.style.bottom = d.landingOffset + '%'; 
+                const verticalPosition = 100 - Number(d.landingOffset);
+                charBox.style.bottom = 'auto';
+                charBox.style.top = verticalPosition + '%';
+                charBox.style.translate = `0 -${verticalPosition}%`;
                 // Размер меняется у контейнера: так GIF и статичные изображения масштабируются одинаково.
                 charBox.style.width = (40 * Number(d.size) / 100) + '%';
                 img.style.width = '100%';
@@ -765,7 +772,7 @@ function checkChoice(b,isCor){if(!gameStarted)activateGame();if(isAnswered)retur
 function checkInput(){if(!gameStarted)activateGame();if(isAnswered)return;isAnswered=true;const i=document.getElementById('inp-ans');i.disabled=true;document.querySelector('.inp-area .game-btn').disabled=true;if(i.value.trim().toLowerCase()===(quests[currentQIndex].correctInp||'').trim().toLowerCase()){handleCorrect(i);}else{handleWrong(i);const hint=document.createElement('div');hint.className='correct-answer-hint';hint.innerText='Верный ответ: '+quests[currentQIndex].correctInp;i.closest('.inp-area').appendChild(hint);}}
 function handleCorrect(el){document.body.style.pointerEvents='none';animateAttack('hero-wrap','boss-wrap','var(--green)','+100');if(el.tagName==='BUTTON'){el.style.background='var(--green)';el.style.color='#000';}else{el.style.borderColor='var(--green)';}setTimeout(()=>{battleState=Math.min(100,battleState+step);updatePositionsAndProgress();document.body.style.pointerEvents='';if(battleState<100)loadNextQuestion();},1000);}
 function handleWrong(el){document.body.style.pointerEvents='none';animateAttack('boss-wrap','hero-wrap','var(--red)','+100');if(el.tagName==='BUTTON'){el.style.background='var(--red)';}else{el.style.borderColor='var(--red)';}setTimeout(()=>{battleState=Math.max(0,battleState-step);updatePositionsAndProgress();document.body.style.pointerEvents='';if(battleState>0)loadNextQuestion();},1000);}
-function endGame(didWin){if(isGameOver)return;isGameOver=true;document.body.style.pointerEvents='none';if(document.getElementById('timer-wrap'))document.getElementById('timer-wrap').style.display='none';const p=document.getElementById('q-panel');p.innerHTML="";let msg,color,winnerImg,winnerId;if(didWin===true){msg=langPack.win;color='var(--green)';document.getElementById('boss-img').style.opacity='0';winnerImg=document.getElementById('hero-img');winnerId='hero-wrap';}else{msg=langPack.lose;color='var(--red)';document.getElementById('hero-img').style.opacity='0';winnerImg=document.getElementById('boss-img');winnerId='boss-wrap';}
+function endGame(didWin){if(isGameOver)return;isGameOver=true;document.body.style.pointerEvents='none';if(document.getElementById('timer-wrap'))document.getElementById('timer-wrap').style.display='none';const p=document.getElementById('q-panel');p.innerHTML="";let msg,color,winnerImg,winnerId;if(didWin===true){msg=langPack.win;color='${d.design.winTextCol}';document.getElementById('boss-img').style.opacity='0';winnerImg=document.getElementById('hero-img');winnerId='hero-wrap';}else{msg=langPack.lose;color='${d.design.loseTextCol}';document.getElementById('hero-img').style.opacity='0';winnerImg=document.getElementById('boss-img');winnerId='boss-wrap';}
 if(winnerImg){winnerImg.style.animation='fx-bounce 1s ease-in-out infinite';showScore(winnerId,'+1000','var(--green)');}
 p.innerHTML=\`<h2 style='font-size:40px;color:\${color};text-shadow:0 0 20px \${color}'>\${msg}</h2>\`;}
 function initGame(){if(${d.titleScreenOn}){}else{document.getElementById('game-root').style.opacity='1';loadNextQuestion();}}
@@ -810,8 +817,8 @@ body{margin:0;overflow:hidden;font-family:${d.design.fontFam};user-select:none;w
     width:35%; height:auto; display:flex; align-items:flex-end; justify-content:center; 
     position:absolute; transition:transform 1s ease-in-out, opacity 0.5s;
 }
-.hero-wrap{left:${d.hero.posX}%;width:${35 * Number(d.hero.size) / 100}%;}
-.boss-wrap{right:${d.boss.posX}%;width:${35 * Number(d.boss.size) / 100}%;}
+.hero-wrap{left:${d.hero.posX}%;width:${35 * Number(d.hero.size) / 100}%;top:${100-Number(d.hero.landingOffset)}%;translate:0 -${100-Number(d.hero.landingOffset)}%;}
+.boss-wrap{right:${d.boss.posX}%;width:${35 * Number(d.boss.size) / 100}%;top:${100-Number(d.boss.landingOffset)}%;translate:0 -${100-Number(d.boss.landingOffset)}%;}
 .char{max-width:100%;max-height:100%;object-fit:contain;transition:filter 0.5s, opacity 0.5s;}
 #projectile { position: absolute; width: 30px; height: 30px; border-radius: 50%; opacity: 0; z-index: 100; transition: left 0.5s linear, top 0.5s linear, transform 0.2s, opacity 0.2s; pointer-events: none; transform-origin: center; margin-left: -15px; margin-top: -15px; }
 .score-popup{position:fixed;z-index:101;opacity:0;font-family:${d.design.fontFam};font-size:20px;transform:translateX(-50%);pointer-events:none;}
@@ -840,10 +847,10 @@ ${generatedOverlay}
     <div class="player-info ui-element"><span class="char-name">${qData.bName}</span><div class="hp-bar"><div id="bar-b" class="hp-fill" style="background:${d.design.hpBoss};width:50%;"></div></div></div>
 </div>
 <div class="stage-area"><div class="battle-ground"><div class="score-popup" id="hero-score-popup"></div><div class="score-popup" id="boss-score-popup"></div>
-    <div class="char-wrap hero-wrap" id="hero-wrap" style="bottom:${d.hero.landingOffset}%;">
+    <div class="char-wrap hero-wrap" id="hero-wrap">
         <img src="${d.hero.src}" class="char" id="hero-img" style="${hImgStyle}">
     </div>
-    <div class="char-wrap boss-wrap" id="boss-wrap" style="bottom:${d.boss.landingOffset}%;">
+    <div class="char-wrap boss-wrap" id="boss-wrap">
         <img src="${d.boss.src}" class="char" id="boss-img" style="${bImgStyle}">
     </div>
 </div></div>
@@ -919,7 +926,7 @@ ${generatedOverlay}
                 c_panel_col:this.data.design.panelCol,r_panel_op:this.data.design.panelOp,c_hp_hero:this.data.design.hpHero,c_hp_boss:this.data.design.hpBoss,c_hp_border:this.data.design.hpBorder,
                 r_hp_glow:this.data.design.hpGlow,c_hp_glow:this.data.design.hpGlowCol,s_font:this.data.design.fontFam,r_q_font_size:this.data.design.qFontSize,c_q_text:this.data.design.qTextCol,
                 r_a_font_size:this.data.design.aFontSize,c_a_text:this.data.design.aTextCol,c_title_bg:this.data.design.titleBgCol,r_title_op:this.data.design.titleBgOp,
-                c_title_c1:this.data.design.titleCol1,c_title_c2:this.data.design.titleCol2,c_play_btn:this.data.design.playBtnCol,r_play_op:this.data.design.playBtnOp,r_play_glow:this.data.design.playBtnGlow,c_play_glow:this.data.design.playBtnGlowCol
+                c_title_c1:this.data.design.titleCol1,c_title_c2:this.data.design.titleCol2,c_win_text:this.data.design.winTextCol,c_lose_text:this.data.design.loseTextCol,c_play_btn:this.data.design.playBtnCol,r_play_op:this.data.design.playBtnOp,r_play_glow:this.data.design.playBtnGlow,c_play_glow:this.data.design.playBtnGlowCol
             };
             Object.entries(values).forEach(([id,value])=>{const el=document.getElementById(id);if(el&&value!==undefined)el.value=value;});
             document.getElementById('chk_timer').checked=!!this.data.timerOn;
