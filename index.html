@@ -135,7 +135,7 @@
                             </div>
                             <div class="param-row">
                                 <span>Отступ от края</span>
-                                <input type="range" id="r_h_posx" min="0" max="45" value="10" style="width:60%">
+                                <input type="range" id="r_h_posx" min="-10" max="45" value="10" style="width:60%">
                                 <span id="val_h_posx" style="width:10%; text-align: right;">10%</span>
                             </div>
                         </div>
@@ -159,7 +159,7 @@
                             </div>
                             <div class="param-row">
                                 <span>Отступ от края</span>
-                                <input type="range" id="r_b_posx" min="0" max="45" value="10" style="width:60%">
+                                <input type="range" id="r_b_posx" min="-10" max="45" value="10" style="width:60%">
                                 <span id="val_b_posx" style="width:10%; text-align: right;">10%</span>
                             </div>
                         </div>
@@ -817,7 +817,7 @@ body{margin:0;overflow:hidden;font-family:${d.design.fontFam};user-select:none;w
 .media-controls { display: flex; gap: 10px; }
 .media-btn { background: rgba(35,31,52,0.8); color: #fff; border: 1px solid var(--primary); border-radius: 50%; width: 32px; height: 32px; font-size: 16px; cursor: pointer; display:flex; align-items: center; justify-content: center;}
 .stage-area{flex:1;position:relative;overflow:hidden;}
-.battle-ground { position: absolute; inset: 0 5%; bottom: 0; padding-bottom: 22%; }
+.battle-ground { position: absolute; inset: 0; bottom: 0; padding-bottom: 22%; }
 .char-wrap{
     width:35%; height:auto; display:flex; align-items:flex-end; justify-content:center; 
     position:absolute; transition:transform 1s ease-in-out, opacity 0.5s;
