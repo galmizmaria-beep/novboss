@@ -11,8 +11,7 @@
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Montserrat:wght@400;700;900&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Comfortaa:wght@400;700&family=Lobster&family=Montserrat:wght@400;700;900&family=Oswald:wght@400;700&family=Pacifico&family=Play:wght@400;700&family=Press+Start+2P&family=Rajdhani:wght@500;600;700&family=Roboto:wght@400;700;900&family=Rubik:wght@400;700;900&family=Russo+One&family=Ubuntu:wght@400;700&display=swap');
         #FX_ROOT {
             --bg-dark: #0A0912; --bg-panel: #12101E; --primary: #8A2BE2; --cyan: #00D2FF;
             --green: #00FF88; --red: #ff3b30; --text: #EAEAEA; --border: rgba(138, 43, 226, 0.3);
@@ -225,6 +224,16 @@
                                 <option value="'Montserrat', sans-serif">Montserrat</option>
                                 <option value="'Rajdhani', sans-serif">Rajdhani</option>
                                 <option value="'Press Start 2P', cursive">Press Start 2P</option>
+                                <option value="'Roboto', sans-serif">Roboto</option>
+                                <option value="'Rubik', sans-serif">Rubik</option>
+                                <option value="'Oswald', sans-serif">Oswald</option>
+                                <option value="'Russo One', sans-serif">Russo One</option>
+                                <option value="'Play', sans-serif">Play</option>
+                                <option value="'Comfortaa', cursive">Comfortaa</option>
+                                <option value="'Ubuntu', sans-serif">Ubuntu</option>
+                                <option value="'Caveat', cursive">Caveat</option>
+                                <option value="'Lobster', cursive">Lobster</option>
+                                <option value="'Pacifico', cursive">Pacifico</option>
                                 <option value="Arial, sans-serif">Arial</option>
                                 <option value="'Courier New', monospace">Courier New</option>
                             </select>
@@ -689,7 +698,9 @@
                 const charBox = img.parentNode;
                 img.src=d.src;
                 charBox.style.bottom = d.landingOffset + '%'; 
-                img.style.width = d.size + '%';
+                // Размер меняется у контейнера: так GIF и статичные изображения масштабируются одинаково.
+                charBox.style.width = (40 * Number(d.size) / 100) + '%';
+                img.style.width = '100%';
                 img.style.height = 'auto';
                 img.style.filter=d.gP>0?`drop-shadow(0 0 ${d.gP}px ${d.gC})`:'none';
                 let dur=(11-d.speed)*0.5;
@@ -723,8 +734,8 @@
 
             const getAnimRule=o=>{if(o.anim==='none')return'';let dur=(11-o.speed)*0.5;if(['shake','wobble'].includes(o.anim))dur*=.5;let timing='ease-in-out';if(['glitch'].includes(o.anim))timing=`steps(${Math.round(dur*10)})`;if(['shake','spin','flip'].includes(o.anim))timing='linear';return`animation:fx-${o.anim} ${dur}s infinite ${timing};transform-origin:${o.anim==='swing'?'top center':'center'};`;};
             
-            const hImgStyle=`width:${d.hero.size}%; height:auto; filter:${d.hero.gP>0?`drop-shadow(0 0 ${d.hero.gP}px ${d.hero.gC})`:''};${getAnimRule(d.hero)}`;
-            const bImgStyle=`width:${d.boss.size}%; height:auto; filter:${d.boss.gP>0?`drop-shadow(0 0 ${d.boss.gP}px ${d.boss.gC})`:''};${getAnimRule(d.boss)}`;
+            const hImgStyle=`width:100%; height:auto; filter:${d.hero.gP>0?`drop-shadow(0 0 ${d.hero.gP}px ${d.hero.gC})`:''};${getAnimRule(d.hero)}`;
+            const bImgStyle=`width:100%; height:auto; filter:${d.boss.gP>0?`drop-shadow(0 0 ${d.boss.gP}px ${d.boss.gC})`:''};${getAnimRule(d.boss)}`;
 
             const generatedOverlay = d.titleScreenOn ? `<div class="overlay" id="start-overlay"><div class="big-title">${langData[this.gameLang].title.replace(/\|/g, '<br>')}</div><button class="play-btn" onclick="startGame()"> ${langData[this.gameLang].play}</button></div>` : '';
 
@@ -764,7 +775,7 @@ document.addEventListener('DOMContentLoaded',initGame);
 <script>window.MathJax={tex:{inlineMath:[['$','$']]}};\<\/script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">\<\/script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rajdhani:wght@700&family=Montserrat:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Comfortaa:wght@400;700&family=Lobster&family=Montserrat:wght@400;700;900&family=Oswald:wght@400;700&family=Pacifico&family=Play:wght@400;700&family=Press+Start+2P&family=Rajdhani:wght@500;600;700&family=Roboto:wght@400;700;900&family=Rubik:wght@400;700;900&family=Russo+One&family=Ubuntu:wght@400;700&display=swap');
 :root{ --primary: #8A2BE2; --red: #ff3b30; --green: #00FF88; --magenta: #e521e5;}
 body{margin:0;overflow:hidden;font-family:${d.design.fontFam};user-select:none;width:100%;height:100vh;background-color:${d.design.bgCol};background-size:cover;background-position:center;transition:background-image 0.5s ease-in-out; background-image:${this.locations.length>0?`linear-gradient(rgba(${bgRgb}, ${d.design.bgOp/100}), rgba(${bgRgb}, ${d.design.bgOp/100})), url(${this.locations[0].data})`:'none'}; display: flex; align-items: center; justify-content: center;}
 * { box-sizing: border-box; }
@@ -799,8 +810,8 @@ body{margin:0;overflow:hidden;font-family:${d.design.fontFam};user-select:none;w
     width:35%; height:auto; display:flex; align-items:flex-end; justify-content:center; 
     position:absolute; transition:transform 1s ease-in-out, opacity 0.5s;
 }
-.hero-wrap{left:${d.hero.posX}%;}
-.boss-wrap{right:${d.boss.posX}%;}
+.hero-wrap{left:${d.hero.posX}%;width:${35 * Number(d.hero.size) / 100}%;}
+.boss-wrap{right:${d.boss.posX}%;width:${35 * Number(d.boss.size) / 100}%;}
 .char{max-width:100%;max-height:100%;object-fit:contain;transition:filter 0.5s, opacity 0.5s;}
 #projectile { position: absolute; width: 30px; height: 30px; border-radius: 50%; opacity: 0; z-index: 100; transition: left 0.5s linear, top 0.5s linear, transform 0.2s, opacity 0.2s; pointer-events: none; transform-origin: center; margin-left: -15px; margin-top: -15px; }
 .score-popup{position:fixed;z-index:101;opacity:0;font-family:${d.design.fontFam};font-size:20px;transform:translateX(-50%);pointer-events:none;}
